@@ -1,0 +1,3 @@
+class Photographer < ApplicationRecord
+
+end

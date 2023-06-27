@@ -16,6 +16,17 @@ class PhotographersController < ApplicationController
         render json: photographer, status: :created
     end
 
+    def update
+        photographer = Photographer.find_by(id: params[:id])
+        if photographer
+            photographer.update(photographer_params)
+            render json: photographer, status: :accepted
+        else
+            render json: {error: "Photographer Not Found"}, status: :not Found
+        end
+    end
+
+
     def destroy
         photographer = Photographer.find_by(id: params[:id])
         if photographer

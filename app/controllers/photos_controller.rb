@@ -3,13 +3,13 @@ class PhotosController < ApplicationController
 
     def index
         photos = Photo.all
-        render json: photos, status: :ok
+        render json: photos, except: [:created_at, :updated_at], status: :ok
     end
 
     def show
         photo = find_photo
         if photo
-            render json: photo, status: :ok
+            render json: photo, except: [:created_at, :updated_at], status: :ok
         else
             render json: {error: "Photo Not Found"}, status: :not_found
         end
@@ -17,14 +17,14 @@ class PhotosController < ApplicationController
 
     def create
         photo = Photo.create(photo_params)
-        render json: photo, status: :created
+        render json: photo, except: [:created_at, :updated_at], status: :created
     end
 
     def update
         photo = find_photo
         if photo
             photo.update(photo_params)
-            render json: photo, status: :ok
+            render json: photo, except: [:created_at, :updated_at], status: :ok
         else
             render json: {error: "Bird Not Found"}, status: :not_found
         end

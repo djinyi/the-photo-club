@@ -22,7 +22,7 @@ class PhotographersController < ApplicationController
             photographer.update(photographer_params)
             render json: photographer, status: :accepted
         else
-            render json: {error: "Photographer Not Found"}, status: :not Found
+            render json: {error: "Photographer Not Found"}, status: :not_found
         end
     end
 

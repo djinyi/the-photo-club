@@ -8,7 +8,11 @@ class PhotographersController < ApplicationController
 
     def show 
         photographer = find_photographer
-        render json: photographer, except: [:created_at, :updated_at], status: :ok
+        if photographer
+            render json: photographer, except: [:created_at, :updated_at], status: :ok
+        else
+            render_not_found_response
+        end
     end
 
     def create 
@@ -22,7 +26,7 @@ class PhotographersController < ApplicationController
             photographer.update(photographer_params)
             render json: photographer, except: [:created_at, :updated_at], status: :accepted
         else
-            render json: {error: "Photographer Not Found"}, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -33,7 +37,7 @@ class PhotographersController < ApplicationController
             photographer.destroy
             head :no_content
         else 
-            render json: {error: "Photographer Not Found"}, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -44,7 +48,12 @@ class PhotographersController < ApplicationController
     end
 
     def find_photographer
-        Photographer.find(params[:id])
+        Photographer.find_by(id: params[:id])
     end
+
+    def render_not_found_response
+        render json: {error: "Photographer Not Found"}, status: :not_found
+    end
+
 
 end

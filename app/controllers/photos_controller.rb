@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
         if photo
             render json: photo, except: [:created_at, :updated_at], status: :ok
         else
-            render json: {error: "Photo Not Found"}, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -26,7 +26,7 @@ class PhotosController < ApplicationController
             photo.update(photo_params)
             render json: photo, except: [:created_at, :updated_at], status: :ok
         else
-            render json: {error: "Bird Not Found"}, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -36,7 +36,7 @@ class PhotosController < ApplicationController
             photo.destroy
             render json: {}, head: :no_content
         else
-            render json: {error: "Photo Not Found"}, status: :not_found
+            render_not_found_response
         end
     end
 
@@ -49,6 +49,10 @@ class PhotosController < ApplicationController
 
     def find_photo
         Photo.find_by(id: params[:id])
+    end
+
+    def render_not_found_response
+        render json: {error: "Photo Not Found"}, status: :not_found
     end
 
 

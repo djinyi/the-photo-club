@@ -7,7 +7,7 @@ class PhotographersController < ApplicationController
     end
 
     def show 
-        photographer = Photographer.find(params[:id])
+        photographer = find_photographer
         render json: photographer, status: :ok
     end
 
@@ -17,7 +17,7 @@ class PhotographersController < ApplicationController
     end
 
     def update
-        photographer = Photographer.find_by(id: params[:id])
+        photographer = find_photographer
         if photographer
             photographer.update(photographer_params)
             render json: photographer, status: :accepted
@@ -28,7 +28,7 @@ class PhotographersController < ApplicationController
 
 
     def destroy
-        photographer = Photographer.find_by(id: params[:id])
+        photographer = find_photographer
         if photographer
             photographer.destroy
             head :no_content
@@ -41,6 +41,10 @@ class PhotographersController < ApplicationController
 
     def photographer_params 
         params.permit(:name, :year)
+    end
+
+    def find_photographer
+        Photographer.find(params[:id])
     end
 
 end

@@ -7,7 +7,7 @@ class PhotosController < ApplicationController
     end
 
     def show
-        photo = Photo.find_by(id: params[:id])
+        photo = find_photo
         if photo
             render json: photo, status: :ok
         else
@@ -21,7 +21,7 @@ class PhotosController < ApplicationController
     end
 
     def update
-        photo = Photo.find_by(id: params[:id])
+        photo = find_photo
         if photo
             photo.update(photo_params)
             render json: photo, status: :ok
@@ -31,7 +31,7 @@ class PhotosController < ApplicationController
     end
 
     def destroy
-        photo = Photo.find_by(id: params[:id])
+        photo = find_photo
         if photo
             photo.destroy
             render json: {}, head: :no_content
@@ -46,5 +46,10 @@ class PhotosController < ApplicationController
     def photo_params
         params.permit(:image_url, :title, :year, :description, :medium)
     end
+
+    def find_photo
+        Photo.find_by(id: params[:id])
+    end
+
 
 end

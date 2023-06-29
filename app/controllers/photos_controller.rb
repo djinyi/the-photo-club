@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
 
     def index
@@ -16,14 +17,14 @@ class PhotosController < ApplicationController
     end
 
     def create
-        photo = Photo.create(photo_params)
+        photo = Photo.create!(photo_params)
         render json: photo, except: [:created_at, :updated_at], status: :created
     end
 
     def update
         photo = find_photo
         if photo
-            photo.update(photo_params)
+            photo.update!(photo_params)
             render json: photo, except: [:created_at, :updated_at], status: :ok
         else
             render_not_found_response
@@ -53,6 +54,10 @@ class PhotosController < ApplicationController
 
     def render_not_found_response
         render json: {error: "Photo Not Found"}, status: :not_found
+    end
+
+    def render_unprocessable_entity_response(invalid)
+        render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
     end
 
 

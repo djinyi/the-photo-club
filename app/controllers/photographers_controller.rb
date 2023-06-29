@@ -1,5 +1,6 @@
 class PhotographersController < ApplicationController
     wrap_parameters format: []
+rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     def index
         photographers = Photographer.all
@@ -16,14 +17,14 @@ class PhotographersController < ApplicationController
     end
 
     def create 
-        photographer = Photographer.create(photographer_params)
+        photographer = Photographer.create!(photographer_params)
         render json: photographer, except: [:created_at, :updated_at], status: :created
     end
 
     def update
         photographer = find_photographer
         if photographer
-            photographer.update(photographer_params)
+            photographer.update!(photographer_params)
             render json: photographer, except: [:created_at, :updated_at], status: :accepted
         else
             render_not_found_response

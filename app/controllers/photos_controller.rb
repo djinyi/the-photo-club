@@ -3,8 +3,13 @@ class PhotosController < ApplicationController
     wrap_parameters format: []
 
     def index
-        photos = Photo.all
-        render json: photos, except: [:created_at, :updated_at], status: :ok
+        if params[:photographer_id]
+            photographer = Photographer(params[:photographer_id])
+            photos = photographer.photos
+        else
+            photos = Photo.all
+        end
+        render json: photos, except: [:created_at, :updated_at], include: :photographer, status: :ok
     end
 
     def show

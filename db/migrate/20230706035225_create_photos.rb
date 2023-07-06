@@ -6,6 +6,8 @@ class CreatePhotos < ActiveRecord::Migration[6.1]
       t.integer :year
       t.string :description
       t.string :medium
+      t.belongs_to :photographer, null: false, foreign_key: true
+      t.belongs_to :exhibit, null: false, foreign_key: true
 
       t.timestamps
     end

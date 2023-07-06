@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_02_213004) do
+ActiveRecord::Schema.define(version: 2023_07_06_035225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,14 @@ ActiveRecord::Schema.define(version: 2023_07_02_213004) do
     t.integer "year"
     t.string "description"
     t.string "medium"
+    t.bigint "photographer_id", null: false
+    t.bigint "exhibit_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "photographer_id"
-    t.integer "exhibit_id"
+    t.index ["exhibit_id"], name: "index_photos_on_exhibit_id"
+    t.index ["photographer_id"], name: "index_photos_on_photographer_id"
   end
 
+  add_foreign_key "photos", "exhibits"
+  add_foreign_key "photos", "photographers"
 end

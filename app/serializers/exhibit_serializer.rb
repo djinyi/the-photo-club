@@ -1,3 +1,3 @@
 class ExhibitSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :name, :location, :date
 end

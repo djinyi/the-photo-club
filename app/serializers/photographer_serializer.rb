@@ -1,3 +1,3 @@
 class PhotographerSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :name, :year
 end

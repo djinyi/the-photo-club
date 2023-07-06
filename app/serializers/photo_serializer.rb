@@ -1,3 +1,6 @@
 class PhotoSerializer < ActiveModel::Serializer
-  attributes :image_url, :title, :year, :description, :medium, :photographer_id, :exhibit_id
+  attributes :id, :image_url, :title, :year, :description, :medium, :photographer_id, :exhibit_id
+
+  belongs_to :photographer
+  belongs_to :exhibit
 end

@@ -1,3 +1,6 @@
 class PhotographerSerializer < ActiveModel::Serializer
-  attributes :name, :year
+  attributes :id, :name, :year
+
+  has_many :photos, dependent: :destroy
+  has_many :exhibits, through: :photos, dependent: :destroy
 end

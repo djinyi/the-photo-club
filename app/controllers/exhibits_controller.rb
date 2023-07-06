@@ -2,6 +2,6 @@ class ExhibitsController < ApplicationController
 
     def index
         exhibits = Exhibit.all
-        render json: exhibits, except: [:created_at, :updated_at], status: :ok
+        render json: exhibits, status: :ok
     end
 end

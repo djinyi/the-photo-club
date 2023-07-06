@@ -4,13 +4,13 @@ class PhotographersController < ApplicationController
 
     def index
         photographers = Photographer.all
-        render json: photographers, except: [:created_at, :updated_at], status: :ok
+        render json: photographers, status: :ok
     end
 
     def show 
         photographer = find_photographer
         if photographer
-            render json: photographer, except: [:created_at, :updated_at], status: :ok
+            render json: photographer, status: :ok
         else
             render_not_found_response
         end
@@ -18,14 +18,14 @@ class PhotographersController < ApplicationController
 
     def create 
         photographer = Photographer.create!(photographer_params)
-        render json: photographer, except: [:created_at, :updated_at], status: :created
+        render json: photographer, status: :created
     end
 
     def update
         photographer = find_photographer
         if photographer
             photographer.update!(photographer_params)
-            render json: photographer, except: [:created_at, :updated_at], status: :accepted
+            render json: photographer, status: :accepted
         else
             render_not_found_response
         end

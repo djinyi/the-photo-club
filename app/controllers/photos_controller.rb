@@ -9,13 +9,13 @@ class PhotosController < ApplicationController
         else
             photos = Photo.all
         end
-        render json: photos, except: [:created_at, :updated_at], include: :photographer, status: :ok
+        render json: photos, include: :photographer, status: :ok
     end
 
     def show
         photo = find_photo
         if photo
-            render json: photo, except: [:created_at, :updated_at], status: :ok
+            render json: photo, status: :ok
         else
             render_not_found_response
         end
@@ -23,14 +23,14 @@ class PhotosController < ApplicationController
 
     def create
         photo = Photo.create!(photo_params)
-        render json: photo, except: [:created_at, :updated_at], status: :created
+        render json: photo, status: :created
     end
 
     def update
         photo = find_photo
         if photo
             photo.update!(photo_params)
-            render json: photo, except: [:created_at, :updated_at], status: :ok
+            render json: photo, status: :ok
         else
             render_not_found_response
         end

@@ -4,13 +4,13 @@ class PhotographersController < ApplicationController
 
     def index
         photographers = Photographer.all
-        render json: photographers, status: :ok
+        render json: photographers, include: ['photos', 'photos.exhibits'], status: :ok
     end
 
     def show 
         photographer = find_photographer
         if photographer
-            render json: photographer, status: :ok
+            render json: photographer, include: ['photos', 'photos.exhibits'], status: :ok
         else
             render_not_found_response
         end

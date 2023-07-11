@@ -45,6 +45,10 @@ function App() {
     />
   ))
 
+  function setUser(user){
+    console.log(user)
+  }
+
   return (
     <div>
       <NavBar />
@@ -54,6 +58,9 @@ function App() {
         </Route>
         <Route exact path="/exhibits">
           <Exhibits shows={listExhibits} />
+        </Route>
+        <Route>
+          <SignUp setUser={setUser}/>
         </Route>
       </Switch>
     </div>

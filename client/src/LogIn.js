@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Login({ setUser }) {
+function Login({ setUser, handleClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,6 +41,7 @@ function Login({ setUser }) {
         />
         <button type="submit">Login</button>
       </form>
+      <p onClick={handleClick}>Sign in.</p>
     </div>
   );
 }

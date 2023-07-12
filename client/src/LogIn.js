@@ -41,7 +41,7 @@ function Login({ setUser, handleClick }) {
         />
         <button type="submit">Login</button>
       </form>
-      <p onClick={handleClick}>Sign in.</p>
+      <p onClick={handleClick}>New user? <b>Create an account.</b></p>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LogIn from "./LogIn";
+import SignUp from "./SignUp"
 
 function Home({ user }) {
   const [login, setLogin] = useState(true)
@@ -13,7 +14,7 @@ function Home({ user }) {
       return <h1>Welcome, {user.username}!</h1>;
     } else {
       return <div>
-        <p> {login? <p>"Already have an account? <b onClick={handleClick}>Log in.</b>"</p> : <LogIn handleClick={handleClick} />} </p>
+        <p> {login? <div><SignUp /> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn handleClick={handleClick} />} </p>
       </div>
     }
   }

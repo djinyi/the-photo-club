@@ -9,13 +9,16 @@ function NavBar() {
                 <p>Home</p>
             </NavLink>
             </li>
-            <li><NavLink exact to="/photographers">
-                <p>Photographers</p>
-            </NavLink>
-            </li>
+            <li><NavLink exact to="/exhibits">
+                <p>Photo Submissions</p>
+            </NavLink></li>
             <li><NavLink exact to="/exhibits">
                 <p>Student Exhibits</p>
             </NavLink></li>
+            <li><NavLink exact to="/photographers">
+                <p>Meet the Photographers</p>
+            </NavLink>
+            </li>
         </NavStyle>
     )
 }

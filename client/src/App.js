@@ -37,7 +37,13 @@ function App() {
     ))
     
     // const photoList = photographers.map((photographer) => {
-    //   console.log(photographer.photos)
+    //   console.log(photographer.photos.map((photo) => {
+    //   <Photo
+    //   key = {photo.id}
+    //   id = {photo.id}
+    //   name = {photo.name}
+    //   url = {photo.image_url} />
+    // })
     // })
     console.log(photographers)
 

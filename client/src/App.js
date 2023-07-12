@@ -5,8 +5,8 @@ import Photographer from "./Photographer";
 import Exhibits from "./Exhibits";
 import Exhibit from "./Exhibit";
 import NavBar from "./NavBar";
-import SignUp from "./SignUp";
 import Home from "./Home";
+import Photos from "./Photos";
 
 
 function App() {
@@ -55,17 +55,19 @@ function App() {
     <div>
       <NavBar />
       <Switch>
+        <Route exact path="/home">
+          <Home />
+        </Route>
         <Route exact path="/photographers">
           <Photographers students={students} />
         </Route>
         <Route exact path="/exhibits">
           <Exhibits shows={listExhibits} />
         </Route>
-        <Route exact path="./signup">
-          <SignUp setUser={setUser}/>
+        <Route exact path="/photos">
+          <Photos />
         </Route>
       </Switch>
-      <Home />
     </div>
   );
 }

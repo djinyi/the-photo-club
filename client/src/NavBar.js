@@ -9,7 +9,7 @@ function NavBar() {
                 <p>Home</p>
             </NavLink>
             </li>
-            <li><NavLink exact to="/exhibits">
+            <li><NavLink exact to="/photos">
                 <p>Photo Submissions</p>
             </NavLink></li>
             <li><NavLink exact to="/exhibits">

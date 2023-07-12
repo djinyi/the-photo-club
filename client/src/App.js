@@ -6,6 +6,7 @@ import Exhibits from "./Exhibits";
 import Exhibit from "./Exhibit";
 import NavBar from "./NavBar";
 import SignUp from "./SignUp";
+import Home from "./Home";
 
 
 function App() {
@@ -60,10 +61,11 @@ function App() {
         <Route exact path="/exhibits">
           <Exhibits shows={listExhibits} />
         </Route>
-        <Route>
+        <Route exact path="./signup">
           <SignUp setUser={setUser}/>
         </Route>
       </Switch>
+      <Home />
     </div>
   );
 }

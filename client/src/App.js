@@ -25,9 +25,8 @@ function App() {
     .then(data => setExhibits(data))
   }, []);
 
-  console.log(photographers)
   console.log(exhibits)
-
+  
   const students = photographers.map((photographer) => (
     <Photographer 
     key ={photographer.id}
@@ -35,7 +34,12 @@ function App() {
     name ={photographer.name}
     year ={photographer.year}
     />
-  ))
+    ))
+    
+    // const photoList = photographers.map((photographer) => {
+    //   console.log(photographer.photos)
+    // })
+    console.log(photographers)
 
   const listExhibits = exhibits.map((exhibits) => (
     <Exhibit

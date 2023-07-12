@@ -5,6 +5,10 @@ import styled from "styled-components";
 function NavBar() {
     return (
         <NavStyle>
+            <li><NavLink exact to="/home">
+                <p>Home</p>
+            </NavLink>
+            </li>
             <li><NavLink exact to="/photographers">
                 <p>Photographers</p>
             </NavLink>

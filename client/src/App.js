@@ -27,24 +27,24 @@ function App() {
   console.log(photographers)
   console.log(exhibits)
 
-  // const students = photographers.map((photographer) => (
-  //   <Photographer 
-  //   key ={photographer.id}
-  //   id ={photographer.id}
-  //   name ={photographer.name}
-  //   year ={photographer.year}
-  //   />
-  // ))
+  const students = photographers.map((photographer) => (
+    <Photographer 
+    key ={photographer.id}
+    id ={photographer.id}
+    name ={photographer.name}
+    year ={photographer.year}
+    />
+  ))
 
-  // const listExhibits = exhibits.map((exhibits) => (
-  //   <Exhibit
-  //   key = {exhibits.id}
-  //   id = {exhibits.id}
-  //   name = {exhibits.name}
-  //   location = {exhibits.location}
-  //   date = {exhibits.date}
-  //   />
-  // ))
+  const listExhibits = exhibits.map((exhibits) => (
+    <Exhibit
+    key = {exhibits.id}
+    id = {exhibits.id}
+    name = {exhibits.name}
+    location = {exhibits.location}
+    date = {exhibits.date}
+    />
+  ))
 
   function setUser(user){
     console.log(user)
@@ -55,13 +55,13 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/photographers">
-          <Photographers  />
+          <Photographers students={students} />
         </Route>
         <Route exact path="/exhibits">
-          <Exhibits  />
+          <Exhibits shows={listExhibits} />
         </Route>
         <Route>
-          <SignUp />
+          <SignUp setUser={setUser}/>
         </Route>
       </Switch>
     </div>

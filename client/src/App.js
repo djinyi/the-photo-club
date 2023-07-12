@@ -5,6 +5,7 @@ import Photographer from "./Photographer";
 import Exhibits from "./Exhibits";
 import Exhibit from "./Exhibit";
 import NavBar from "./NavBar";
+import SignUp from "./SignUp";
 
 
 function App() {

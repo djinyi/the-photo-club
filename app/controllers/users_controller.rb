@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    skip_before_action :authorize, only: :create, :delete, :update
+
     def create
         user = User.create(user_params)
         if user.valid?
@@ -7,6 +9,10 @@ class UsersController < ApplicationController
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
+
+    def show
+        render json: @current_user
+      end
 
     private
 

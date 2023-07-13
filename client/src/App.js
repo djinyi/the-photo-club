@@ -63,8 +63,8 @@ function App() {
     />
   ))
 
-  function setUser(user){
-    console.log(user)
+  function addNewPost(newPost){
+    setPhotographers([...photographers, newPost])
   }
 
   return (
@@ -82,7 +82,7 @@ function App() {
           <Exhibits shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
-          <Photos photoList={photoList} />
+          <Photos photoList={photoList} addNewPost={addNewPost} />
         </Route>
       </Switch>
     </div>

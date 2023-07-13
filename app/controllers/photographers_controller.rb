@@ -18,7 +18,7 @@ class PhotographersController < ApplicationController
 
     def create 
         photographer = Photographer.create!(photographer_params)
-        render json: photographer, status: :created
+        render json: photographer, include: ['photos'], status: :created
     end
 
     def update

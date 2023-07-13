@@ -1,9 +1,10 @@
 import React from "react";
 
-function Photos(){
+function Photos({ photoList }){
+    console.log(photoList)
     return(
         <div>
-            <p>hi</p>
+            {photoList}
         </div>
     )
 }

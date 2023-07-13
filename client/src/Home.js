@@ -4,7 +4,6 @@ import SignUp from "./SignUp"
 
 function Home({ user }) {
   const [login, setLogin] = useState(true)
-  const [signin, setSignin] = useState(false)
 
   function handleClick() {
     return setLogin((login) => !login)

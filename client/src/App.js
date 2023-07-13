@@ -7,6 +7,8 @@ import Exhibit from "./Exhibit";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import Photos from "./Photos";
+import Photo from "./Photo";
+import Header from "./Header";
 
 
 function App() {
@@ -36,15 +38,16 @@ function App() {
     />
     ))
     
-    // const photoList = photographers.map((photographer) => {
-    //   console.log(photographer.photos.map((photo) => {
-    //   <Photo
-    //   key = {photo.id}
-    //   id = {photo.id}
-    //   name = {photo.name}
-    //   url = {photo.image_url} />
-    // })
-    // })
+    let photoList = photographers.map((photographer) => {
+      let list = photographer.photos.map((photo) => {
+      return <Photo
+      key = {photo.id}
+      id = {photo.id}
+      title = {photo.title}
+      url = {photo.image_url} />
+    })
+    return list
+    })
     console.log(photographers)
 
   const listExhibits = exhibits.map((exhibits) => (
@@ -63,6 +66,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       <NavBar />
       <Switch>
         <Route exact path="/home">
@@ -75,7 +79,7 @@ function App() {
           <Exhibits shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
-          <Photos />
+          <Photos photoList={photoList} />
         </Route>
       </Switch>
     </div>

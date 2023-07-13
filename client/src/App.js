@@ -44,7 +44,10 @@ function App() {
       key = {photo.id}
       id = {photo.id}
       title = {photo.title}
-      url = {photo.image_url} />
+      url = {photo.image_url} 
+      year = {photo.year}
+      description = {photo.description}
+      medium = {photo.medium} />
     })
     return list
     })

@@ -2,7 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-function NavBar() {
+function NavBar({ user, setUser }) {
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
+
     return (
         <NavStyle>
             <li><NavLink exact to="/home">
@@ -19,9 +27,14 @@ function NavBar() {
                 <p>Meet the Photographers</p>
             </NavLink>
             </li>
+            <li onClick={handleLogoutClick}> <NavLink exact to="/logout">
+            <p>Logout</p>
+            </NavLink>
+            </li>
         </NavStyle>
     )
 }
+
 
 export default NavBar;
 

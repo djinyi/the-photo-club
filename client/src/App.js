@@ -9,11 +9,13 @@ import Home from "./Home";
 import Photos from "./Photos";
 import Photo from "./Photo";
 import Header from "./Header";
+import LogOut from "./LogOut";
 
 
 function App() {
   const [photographers, setPhotographers] = useState([]);
   const [exhibits, setExhibits] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch("/photographers")
@@ -70,10 +72,10 @@ function App() {
   return (
     <div>
       <Header />
-      <NavBar />
+      <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/home">
-          <Home />
+          <Home setUser={setUser} />
         </Route>
         <Route exact path="/photographers">
           <Photographers students={students} />
@@ -83,6 +85,9 @@ function App() {
         </Route>
         <Route exact path="/photos">
           <Photos photoList={photoList} addNewPost={addNewPost} />
+        </Route>
+        <Route exact path="/logout">
+          <LogOut />
         </Route>
       </Switch>
     </div>

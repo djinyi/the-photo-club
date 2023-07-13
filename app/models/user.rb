@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    belongs_to :photographer
+
     
     has_secure_password
 

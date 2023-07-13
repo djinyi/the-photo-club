@@ -20,6 +20,7 @@ function Photos({ photoList, addNewPost }){
                 description: description,
                 image_url: image_url}
         }
+        console.log(formData)
         fetch("/photographers", {
             method: "POST",
             headers: {

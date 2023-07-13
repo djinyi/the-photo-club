@@ -45,7 +45,7 @@ class PhotographersController < ApplicationController
     private
 
     def photographer_params 
-        params.permit(:name, :year)
+        params.permit(:name, :year, :photos, :image_url, :title, :year, :description, :medium)
     end
 
     def find_photographer

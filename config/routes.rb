@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # get "/photographers/:id", to: "photographer#show"
   # get "/photos", to: "photos#index"
   resources :photographers do
-    resources :photos, only: [:show, :index]
+    resources :photos
   end
 
   resources :exhibits, only: [:index, :show]

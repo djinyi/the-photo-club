@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp"
 
-function Home({ user, setTheUser }) {
+function Home({ user, setTheUser, doLog }) {
   const [login, setLogin] = useState(true)
 
 
@@ -14,7 +14,7 @@ function Home({ user, setTheUser }) {
       return <h1>Welcome, {user.username}!</h1>;
     } else {
       return <div>
-        <p> {login? <div><SignUp setTheUser={setTheUser}/> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn handleClick={handleClick} />} </p>
+        <p> {login? <div><SignUp setTheUser={setTheUser}/> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn doLog={doLog} handleClick={handleClick} />} </p>
       </div>
     }
   }

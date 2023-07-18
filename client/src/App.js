@@ -18,10 +18,6 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [exhibits, setExhibits] = useState([]);
   const [user, setUser] = useState(null);
-
-  function setLeUser(user){
-    setUser(user)
-  }
   
   useEffect(() => {
     fetch("/photographers")
@@ -49,7 +45,7 @@ function App() {
     });
   }, []);
 
-  if (!user) return <LogIn onLogIn={setLeUser} />;
+
 
   console.log(exhibits)
   
@@ -88,13 +84,17 @@ function App() {
     setPhotographers([...photographers, newPost])
   }
 
+  function doLog(data){
+    setUser(data)
+  }
+
   return (
     <div>
       <Header />
       <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/home">
-          <Home setTheUser={setUser} />
+          <Home setTheUser={setUser} doLog={doLog}/>
         </Route>
         <Route exact path="/photographers">
           <Photographers students={students} />
@@ -107,6 +107,9 @@ function App() {
         </Route>
         <Route exact path="/logout">
           <LogOut />
+        </Route>
+        <Route exact path="/login">
+        <LogIn  />
         </Route>
       </Switch>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function LogIn({ onLogIn, handleClick }) {
+function LogIn({ doLog, handleClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,10 +15,11 @@ function LogIn({ onLogIn, handleClick }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => console.log(user));
-      }
+        r.json().then((data) => doLog(data));
+      } 
     });
   }
+
 
   return (
     <div>

@@ -22,6 +22,10 @@ function SignUp({ setTheUser }) {
         r.json().then((user) => setTheUser(user));
       }
     });
+
+    setUsername("");
+    setPassword("");
+    setPasswordComfirmation("");
   }
 
   return (

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :photos
   end
 
-  resources :exhibits, only: [:index, :show, :create]
+  resources :exhibits
   resources :photos
   # get "/exhibits", to: "exhibits#index"
   post "/signup", to: "users#create"

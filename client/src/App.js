@@ -14,6 +14,7 @@ import LogOut from "./LogOut";
 
 function App() {
   const [photographers, setPhotographers] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [exhibits, setExhibits] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -24,6 +25,12 @@ function App() {
   }, []);
 
   useEffect(() => {
+    fetch("/photos")
+    .then((r) => r.json())
+    .then(data => setPhotos(data))
+  }, []);
+
+  useEffect(() => {
     fetch("/exhibits")
     .then((r) => r.json())
     .then(data => setExhibits(data))
@@ -31,7 +38,7 @@ function App() {
 
   console.log(exhibits)
   
-  const students = photographers.map((photographer) => (
+  let students = photographers.map((photographer) => (
     <Photographer 
     key ={photographer.id}
     id ={photographer.id}
@@ -40,8 +47,7 @@ function App() {
     />
     ))
     
-    let photoList = photographers.map((photographer) => {
-      let list = photographer.photos.map((photo) => {
+    let photoList = photos.map((photo) => {
       return <Photo
       key = {photo.id}
       id = {photo.id}
@@ -51,11 +57,9 @@ function App() {
       description = {photo.description}
       medium = {photo.medium} />
     })
-    return list
-    })
-    console.log(photographers)
+  
 
-  const listExhibits = exhibits.map((exhibits) => (
+  let listExhibits = exhibits.map((exhibits) => (
     <Exhibit
     key = {exhibits.id}
     id = {exhibits.id}
@@ -75,7 +79,7 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/home">
-          <Home setUser={setUser} />
+          <Home setTheUser={setUser} />
         </Route>
         <Route exact path="/photographers">
           <Photographers students={students} />

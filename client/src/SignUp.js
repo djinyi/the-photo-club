@@ -25,7 +25,7 @@ function SignUp({ setTheUser }) {
 
     setUsername("");
     setPassword("");
-    setPasswordComfirmation("");
+    setPasswordConfirmation("");
   }
 
   return (

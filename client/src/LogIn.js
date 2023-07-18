@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-function LogIn({ setUser, handleClick }) {
+function LogIn({ onLogIn, handleClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,7 +15,7 @@ function LogIn({ setUser, handleClick }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => console.log(user));
       }
     });
   }

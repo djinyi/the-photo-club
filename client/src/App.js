@@ -10,6 +10,7 @@ import Photos from "./Photos";
 import Photo from "./Photo";
 import Header from "./Header";
 import LogOut from "./LogOut";
+import LogIn from "./LogIn";
 
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
   const [exhibits, setExhibits] = useState([]);
   const [user, setUser] = useState(null);
 
+  function setLeUser(user){
+    setUser(user)
+  }
+  
   useEffect(() => {
     fetch("/photographers")
     .then((r) => r.json())
@@ -35,6 +40,16 @@ function App() {
     .then((r) => r.json())
     .then(data => setExhibits(data))
   }, []);
+
+  useEffect(() => {
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+  if (!user) return <LogIn onLogIn={setLeUser} />;
 
   console.log(exhibits)
   

@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
+    skip_before_action :authorize, only: :index
 
     def index
         if params[:photographer_id]
@@ -22,7 +23,7 @@ class PhotosController < ApplicationController
     end
 
     def create
-        photo = Photo.create!(photo_params)
+        photo = @current_user.photos.create!(photo_params)
         render json: photo, status: :created
     end
 

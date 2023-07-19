@@ -45,7 +45,9 @@ function App() {
     });
   }, []);
 
-
+  function addPhotographer(newPhotog) {
+    setPhotographers([...photographers, newPhotog])
+}
 
   console.log(exhibits)
   
@@ -97,7 +99,7 @@ function App() {
           <Home setTheUser={setUser} doLog={doLog}/>
         </Route>
         <Route exact path="/photographers">
-          <Photographers students={students} />
+          <Photographers addPhotographer={addPhotographer} students={students} />
         </Route>
         <Route exact path="/exhibits">
           <Exhibits shows={listExhibits} />

@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
-function Exhibits({ shows }){
+function Exhibits({ shows, addExhibit }){
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [date, setDate] = useState("");
-
-    const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -20,19 +17,11 @@ function Exhibits({ shows }){
             body: JSON.stringify(formData)
         })
         .then((r) => r.json())
-        .then((newPost) => console.log(newPost))
+        .then((newPost) => addExhibit(newPost))
         
         setName("");
         setLocation("");
         setDate("");
-
-        
-        newPage();
-    }
-    
-
-    function newPage(){
-        history.push('/Exhibits')
     }
 
     return(

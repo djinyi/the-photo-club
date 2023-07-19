@@ -47,7 +47,11 @@ function App() {
 
   function addPhotographer(newPhotog) {
     setPhotographers([...photographers, newPhotog])
-}
+  }
+
+  function addExhibit(newExhibit){
+    setExhibits([...exhibits, newExhibit])
+  }
 
   console.log(exhibits)
   
@@ -102,7 +106,7 @@ function App() {
           <Photographers addPhotographer={addPhotographer} students={students} />
         </Route>
         <Route exact path="/exhibits">
-          <Exhibits shows={listExhibits} />
+          <Exhibits addExhibit={addExhibit} shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
           <Photos photoList={photoList} addNewPost={addNewPost} />

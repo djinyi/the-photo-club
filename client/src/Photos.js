@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Photos({ photoList, addNewPost }){
+function Photos({ photoList, addPhoto }){
     const [title, setTitle] = useState("");
-    const [name, setName] = useState("");
     const [image_url, setImage_url] = useState("");
     const [year, setYear] = useState("");
+    const[medium, setMedium] = useState("");
     const [description, setDescription] = useState("");
 
     const history = useHistory();
@@ -13,15 +13,10 @@ function Photos({ photoList, addNewPost }){
     function handleSubmit(e) {
         e.preventDefault();
         const formData = {
-             name: name,
-             photos: {
-                title: title, 
-                year: year,
-                description: description,
-                image_url: image_url}
+        title, year, description, image_url, medium
         }
         console.log(formData)
-        fetch("/photographers", {
+        fetch("/photos", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,19 +24,14 @@ function Photos({ photoList, addNewPost }){
             body: JSON.stringify(formData)
         })
         .then((r) => r.json())
-        .then((newPost) => console.log(newPost))
+        .then((newPost) => addPhoto(newPost))
         
         setTitle("");
-        setName("");
         setImage_url("");
         setYear("");
         setDescription("");
+        setMedium("");
         
-        newPage();
-    }
-
-    function newPage(){
-        history.push('/Photos')
     }
 
     return(
@@ -55,12 +45,12 @@ function Photos({ photoList, addNewPost }){
             value={title}
             onChange={e => setTitle(e.target.value)}
             />
-            <label>Photographer</label>
+            <label>Medium</label>
             <input
             type="text"
-            id="photographer"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            id="medium"
+            value={medium}
+            onChange={e => setMedium(e.target.value)}
             />
             <label>Image Url</label>
             <input

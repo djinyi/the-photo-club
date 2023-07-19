@@ -52,7 +52,10 @@ function App() {
   function addExhibit(newExhibit){
     setExhibits([...exhibits, newExhibit])
   }
-
+  
+  function addPhoto(newPost){
+    setPhotographers([...photographers, newPost])
+  }
   console.log(exhibits)
   
   let students = photographers.map((photographer) => (
@@ -86,9 +89,6 @@ function App() {
     />
   ))
 
-  function addNewPost(newPost){
-    setPhotographers([...photographers, newPost])
-  }
 
   function doLog(data){
     setUser(data)
@@ -109,7 +109,7 @@ function App() {
           <Exhibits addExhibit={addExhibit} shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
-          <Photos photoList={photoList} addNewPost={addNewPost} />
+          <Photos photoList={photoList} addPhoto={addPhoto} />
         </Route>
         <Route exact path="/logout">
           <LogOut />

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function LogIn({ doLog, handleClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,11 +17,15 @@ function LogIn({ doLog, handleClick }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => doLog(data));
+        r.json().then((data) => doLog(data))
+        .then(newPage())
       } 
     });
   }
 
+  function newPage(){
+      history.push('/photos')
+  }
 
   return (
     <div>

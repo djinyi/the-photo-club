@@ -56,7 +56,7 @@ function App() {
   function addPhoto(newPost){
     setPhotographers([...photographers, newPost])
   }
-  console.log(exhibits)
+  console.log(user)
   
   let students = photographers.map((photographer) => (
     <Photographer 

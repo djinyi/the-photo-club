@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :exhibits
   resources :photos
+  resources :user
   # get "/exhibits", to: "exhibits#index"
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

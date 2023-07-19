@@ -17,7 +17,7 @@ function LogIn({ doLog, handleClick }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => doLog(data))
+        r.json().then((data) => doLog(data.username))
         .then(newPage())
       } 
     });

@@ -5,15 +5,17 @@ function Photos({ photoList, addPhoto }){
     const [title, setTitle] = useState("");
     const [image_url, setImage_url] = useState("");
     const [year, setYear] = useState("");
-    const[medium, setMedium] = useState("");
+    const [medium, setMedium] = useState("");
     const [description, setDescription] = useState("");
+    const [photographer_id, setPhotographer_id] = useState("");
+    const [exhibit_id, setExhibit_id] = useState("");
 
     const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault();
         const formData = {
-        title, year, description, image_url, medium
+        title, year, description, image_url, medium, photographer_id, exhibit_id
         }
         console.log(formData)
         fetch("/photos", {
@@ -31,6 +33,8 @@ function Photos({ photoList, addPhoto }){
         setYear("");
         setDescription("");
         setMedium("");
+        setPhotographer_id("");
+        setExhibit_id("");
         
     }
 
@@ -73,6 +77,20 @@ function Photos({ photoList, addPhoto }){
             id="description"
             value={description}
             onChange={e => setDescription(e.target.value)}
+            />
+            <label>Photographer</label>
+            <input
+            type="text"
+            id="photographer"
+            value={photographer_id}
+            onChange={e => setPhotographer_id(e.target.value)}
+            />
+            <label>Exhibit</label>
+            <input
+            type="text"
+            id="exhibit"
+            value={exhibit_id}
+            onChange={e => setExhibit_id(e.target.value)}
             />
             <button type="submit"> Submit </button>
             </form>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Edit from "./Edit";
+import { useHistory } from "react-router-dom";
 
 function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [titled, setTitled] = useState(title)
@@ -7,12 +8,16 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [yeard, setYeard] = useState(year)
     const [mediumd, setMediumd] = useState(medium)
 
+    const history = useHistory();
+
     function handleDeleteClick() {
         fetch(`/photos/${id}`, {
             method: "DELETE",
         })
         .then((r) => r.json())
-        .then((post) => onDeletePost(post))
+        .then(onDeletePost(id))
+
+        history.push('/photos')
      }
 
      function newEditing(updated) {
@@ -20,15 +25,16 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
         setDescriptiond(updated.description)
         setYeard(updated.year)
         setMediumd(updated.medium)
+
     }
 
     return(
         <div>
-            <p>title: {title}</p>
+            <p>title: {titled}</p>
             <img src={url} alt={description} width="500" />
-            <p>medium: {medium}</p>
-            <p>year: {year}</p>
-            <p>description: {description}</p>
+            <p>medium: {mediumd}</p>
+            <p>year: {yeard}</p>
+            <p>description: {descriptiond}</p>
             <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />
             <button onClick={handleDeleteClick}> Delete Post</button>
         </div>

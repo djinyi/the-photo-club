@@ -35,6 +35,8 @@ function Photos({ photoList, addPhoto }){
         setMedium("");
         setPhotographer_id("");
         setExhibit_id("");
+
+        history.push('/photos')
         
     }
 

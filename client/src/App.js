@@ -54,12 +54,13 @@ function App() {
   }
   
   function addPhoto(newPost){
-    setPhotographers([...photographers, newPost])
+    console.log(newPost)
+    setPhotos([...photos, newPost])
   }
-  console.log(user)
 
-  function handleDeletePost(post) {
-    const updatedPosts = photos.filter((poster) => poster.id !== post.id);
+  function handleDeletePost(id) {
+    console.log(id)
+    const updatedPosts = photos.filter((posted) => posted.id !== id);
     setPhotos(updatedPosts)
 }
   
@@ -72,8 +73,8 @@ function App() {
     />
     ))
     
-    let photoList = photos.map((photo) => {
-      return <Photo
+  let photoList = photos.map((photo) => (
+    <Photo
       key = {photo.id}
       id = {photo.id}
       title = {photo.title}
@@ -82,7 +83,7 @@ function App() {
       description = {photo.description}
       medium = {photo.medium}
       onDeletePost={handleDeletePost} />
-    })
+  ))
   
 
   let listExhibits = exhibits.map((exhibits) => (

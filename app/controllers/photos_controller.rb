@@ -15,7 +15,7 @@ class PhotosController < ApplicationController
 
     def show
         photo = find_photo
-        if photo
+        if photo.user.match?(@current_user)
             render json: photo, status: :ok
         else
             render_not_found_response
@@ -23,7 +23,7 @@ class PhotosController < ApplicationController
     end
 
     def create
-        photo = @current_user.photos.create!(photo_params)
+        photo = @current_user.photos.create(photo_params)
         render json: photo, status: :created
     end
 
@@ -51,7 +51,7 @@ class PhotosController < ApplicationController
     private
 
     def photo_params
-        params.permit(:image_url, :title, :year, :description, :medium)
+        params.permit(:image_url, :title, :year, :description, :medium, :photographer_id, :exhibit_id)
     end
 
     def find_photo

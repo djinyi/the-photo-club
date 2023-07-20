@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Photo({ title, url, id , description, year, medium }){
     return(
@@ -8,6 +9,7 @@ function Photo({ title, url, id , description, year, medium }){
             <p>medium: {medium}</p>
             <p>year: {year}</p>
             <p>description: {description}</p>
+            <Link to={`/photos/${id}`}>Edit</Link>
         </div>
     )
 }

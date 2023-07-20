@@ -57,6 +57,11 @@ function App() {
     setPhotographers([...photographers, newPost])
   }
   console.log(user)
+
+  function handleDeletePost(post) {
+    const updatedPosts = photos.filter((poster) => poster.id !== post.id);
+    setPhotos(updatedPosts)
+}
   
   let students = photographers.map((photographer) => (
     <Photographer 
@@ -75,7 +80,8 @@ function App() {
       url = {photo.image_url} 
       year = {photo.year}
       description = {photo.description}
-      medium = {photo.medium} />
+      medium = {photo.medium}
+      onDeletePost={handleDeletePost} />
     })
   
 

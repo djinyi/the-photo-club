@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../user/UserContext";
 
 function NavBar({ user, setUser }) {
+  const [user, setUser] = useContext(UserContext)
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -28,7 +31,7 @@ function NavBar({ user, setUser }) {
             </NavLink>
             </li>
             <li onClick={handleLogoutClick}> <NavLink exact to="/logout">
-            <p>Logout</p>
+            <p>{user? `Welcome, ${user}!` : "Logout"}</p>
             </NavLink>
             </li>
         </NavStyle>

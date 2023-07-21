@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function SignUp({ setTheUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
+  const history = useHistory();
+  
   function handleSubmit(e) {
     e.preventDefault();
     fetch("/signup", {
@@ -26,6 +29,8 @@ function SignUp({ setTheUser }) {
     setUsername("");
     setPassword("");
     setPasswordConfirmation("");
+
+    history.push('/photos')
   }
 
   return (

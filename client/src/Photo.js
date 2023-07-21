@@ -7,6 +7,7 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [descriptiond, setDescriptiond] = useState(description)
     const [yeard, setYeard] = useState(year)
     const [mediumd, setMediumd] = useState(medium)
+    const [errors, setErrors] = useState([]);
 
     const history = useHistory();
 
@@ -14,8 +15,13 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
         fetch(`/photos/${id}`, {
             method: "DELETE",
         })
-        .then((r) => r.json())
-        .then(onDeletePost(id))
+        .then((r) => {
+            if(r.ok) {
+                r.json().then(onDeletePost(id));
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        });
 
         history.push('/photos')
      }
@@ -37,6 +43,11 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
             <p>description: {descriptiond}</p>
             <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />
             <button onClick={handleDeleteClick}> Delete Post</button>
+            <p>
+                {errors.map((err) => (
+                <b key={err}>{err}!</b>
+                ))}
+            </p>
         </div>
     )
 }

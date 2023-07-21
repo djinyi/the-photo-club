@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../user/UserContext";
 
-function SignUp({ setTheUser }) {
+function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const history = useHistory();
+  const setUser = userContext(UserContext)
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,7 +24,7 @@ function SignUp({ setTheUser }) {
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setTheUser(user));
+        r.json().then((user) => setUser(user));
       }
     });
 

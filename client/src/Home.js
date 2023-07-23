@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import { UserContext } from "./user/UserContext";
 
 function Home({ doLog }) {
+  const [login, setLogin] = useState(false)
 
   const user = useContext(UserContext)
 

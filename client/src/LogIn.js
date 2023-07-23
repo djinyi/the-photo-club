@@ -24,7 +24,7 @@ function LogIn({ doLog, handleClick }) {
   }
 
   function newPage(){
-      history.push('/photos')
+      history.push('/home')
   }
 
   return (

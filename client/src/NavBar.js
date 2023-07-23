@@ -31,7 +31,7 @@ function NavBar() {
             </NavLink>
             </li>
             <li onClick={handleLogoutClick}> <NavLink exact to="/logout">
-            <p>{user? `Welcome, ${user}!` : "Logout"}</p>
+            <p>{user? `${user.username} Profile` : "Logout"}</p>
             </NavLink>
             </li>
         </NavStyle>

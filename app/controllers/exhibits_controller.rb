@@ -3,12 +3,12 @@ class ExhibitsController < ApplicationController
 
     def index
         exhibits = Exhibit.all
-        render json: exhibits, status: :ok
+        render json: exhibits, include: ['photos', 'photos.photographer'], status: :ok
     end
 
     def create
         exhibit = Exhibit.create!(exhibit_params)
-        render json: exhibit, status: :created
+        render json: exhibit, include: ['photos', 'photos.photographer'], status: :created
     end
 
     def destroy

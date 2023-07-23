@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
-import { UserContext } from "../user/UserContext";
+import { UserContext } from "./user/UserContext";
 
 function Home({ doLog }) {
 

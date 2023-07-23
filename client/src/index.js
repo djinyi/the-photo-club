@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from "react-router-dom"
 import App from './App';
-import { UserProvider } from "../context/user";
+import { UserProvider } from "./user/UserContext";
 
 ReactDOM.render(
   <BrowserRouter>

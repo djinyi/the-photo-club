@@ -85,6 +85,7 @@ function App() {
     name = {exhibits.name}
     location = {exhibits.location}
     date = {exhibits.date}
+    photos = {exhibits.photos}
     />
   ))
 

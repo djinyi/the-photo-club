@@ -2,15 +2,19 @@ import React from "react";
 
 function Exhibit({ id, name, location, date, photos }){
 
-    listPhotos = photos.map((photo) => (
+    let listPhotos = photos.map((photo) => (
+        <div>
         <li>{photo.title}</li>
         <li>{photo.medium}</li>
+        <li>{photo.year}</li>
+        </div>
     ))
     return(
         <div>
             <p>name: {name}</p>
             <p>location: {location}</p>
             <p>date: {date}</p>
+            {listPhotos}
         </div>
     )
 }

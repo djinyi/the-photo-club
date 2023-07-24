@@ -7,6 +7,7 @@ function Exhibit({ id, name, location, date, photos }){
         <li>{photo.title}</li>
         <li>{photo.medium}</li>
         <li>{photo.year}</li>
+        <li>{photo.photographer.name}</li>
         </div>
     ))
     return(

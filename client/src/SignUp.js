@@ -63,7 +63,7 @@ function SignUp() {
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           autoComplete="current-password"
         />
-        <Button variant="outlined" type="submit">Sign Up</Button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );

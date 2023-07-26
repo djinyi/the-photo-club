@@ -1,11 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 
 
 function Edit({id, newEditing, titled, setTitled, mediumd, setMediumd, yeard, setYeard, descriptiond, setDescriptiond}){
-
+  const [errors, setErrors] = useState([]);
 
 function handleChange(e, setFn) {
   setFn(e.target.value)
@@ -27,65 +26,54 @@ function handleSave(e){
             description: descriptiond
         }),
     })
-    .then((r) => r.json())
-    .then((updated) => newEditing(updated))
+    .then((r) => {
+      if(r.ok) {
+        r.json().then((updated) => newEditing(updated));
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
 
 
 }
     return(
-        <Detail>
-        <label> Edit Title: </label>
+        <div>
+        <h3> Edit: </h3>
         <form onSubmit={handleSave}>
           <EditText
           name="textbox"
-          style={{width: '200px', marginLeft: '700px'}} 
+          style={{width: '200px'}} 
           value={titled}
           onChange={(e) => handleChange(e, setTitled)}
           showEditButton />
-          <button> Submit </button>
-          </form>
-        <label> Edit Description: </label>
-        <form onSubmit={handleSave}>
           <EditText
           name="textbox"
-          style={{width: '200px', marginLeft: '700px'}} 
+          style={{width: '200px'}} 
           value={descriptiond}
           onChange={(e) => handleChange(e, setDescriptiond)}
           showEditButton />
-          <button> Submit </button>
-          </form>
-        <label> Edit Year: </label>
-        <form onSubmit={handleSave}>
           <EditText
           name="textbox"
-          style={{width: '200px', marginLeft: '700px'}} 
+          style={{width: '200px'}} 
           value={yeard}
           onChange={(e) => handleChange(e, setYeard)}
           showEditButton />
-          <button> Submit </button>
-          </form>
-        <label> Edit Medium: </label>
-        <form onSubmit={handleSave}>
           <EditText
           name="textbox"
-          style={{width: '200px', marginLeft: '700px'}} 
+          style={{width: '200px'}} 
           value={mediumd}
           onChange={(e) => handleChange(e, setMediumd)}
           showEditButton />
           <button> Submit </button>
           </form>
-          </Detail>
+          <p>
+                {errors.map((err) => (
+                <b key={err}>{err}!</b>
+                ))}
+            </p>
+          </div>
     )
 }
 
 export default Edit;
 
-
-const Detail = styled.div`
-display-direction:flex;
-flex-direction:column;
-color:black;
-margin: auto;
-text-align: center;
-font-family: "Times New Roman", Times, serif
-`

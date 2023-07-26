@@ -11,7 +11,7 @@ function LogOut(){
     return(
         <div>
             <p>You've been logged out.</p>
-            {log? <p onClick={handleClick}>Want to log back in?</p>: <LogIn />}
+            {log? <i onClick={handleClick}>Want to log back in?</i>: <LogIn />}
         </div>
     )
 }

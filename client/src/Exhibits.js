@@ -28,21 +28,21 @@ function Exhibits({ shows, addExhibit }){
         <div>
         <h3> Submit a new exhibit! </h3>
         <form onSubmit={handleSubmit}>
-            <label>Name</label>
+            <label> Name </label>
             <input
             type="text"
             id="name"
             value={name}
             onChange={e => setName(e.target.value)}
             />
-            <label>Location</label>
+            <label> Location </label>
             <input
             type="text"
             id="location"
             value={location}
             onChange={e => setLocation(e.target.value)}
             />
-            <label>Date</label>
+            <label> Date </label>
             <input
             type="text"
             id="date"

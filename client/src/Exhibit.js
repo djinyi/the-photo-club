@@ -4,17 +4,15 @@ function Exhibit({ id, name, location, date, photos }){
 
     let listPhotos = photos.map((photo) => (
         <div>
-        <li>{photo.title}</li>
-        <li>{photo.medium}</li>
-        <li>{photo.year}</li>
-        <li>{photo.photographer.name}</li>
+        <p><i>{photo.title} ({photo.year})</i> by {photo.photographer.name}</p>
         </div>
     ))
     return(
         <div>
-            <p>name: {name}</p>
-            <p>location: {location}</p>
-            <p>date: {date}</p>
+            <h1>{name}</h1>
+            <p> <b>location:</b> {location}</p>
+            <p> <b>date:</b> {date}</p>
+            <h3> Photo Selections: </h3>
             {listPhotos}
         </div>
     )

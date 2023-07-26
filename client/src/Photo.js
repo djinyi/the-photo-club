@@ -8,6 +8,7 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [yeard, setYeard] = useState(year)
     const [mediumd, setMediumd] = useState(medium)
     const [errors, setErrors] = useState([]);
+    const [edit, setEdit] = useState(true);
 
     const history = useHistory();
 
@@ -34,14 +35,18 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
 
     }
 
+    function handleClick() {
+        return setEdit((edit) => !edit)
+      }
+
     return(
         <div>
-            <p>title: {titled}</p>
+            <h3> {titled}</h3>
             <img src={url} alt={description} width="500" />
-            <p>medium: {mediumd}</p>
-            <p>year: {yeard}</p>
-            <p>description: {descriptiond}</p>
-            <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />
+            <p><b>medium:</b> {mediumd}</p>
+            <p><b>year:</b> {yeard}</p>
+            <p><b>description:</b> {descriptiond}</p>
+            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
             <button onClick={handleDeleteClick}> Delete Post</button>
             <p>
                 {errors.map((err) => (

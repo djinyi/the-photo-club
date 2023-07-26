@@ -31,7 +31,7 @@ function LogIn({ doLog, handleClick }) {
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username"> Username </label>
         <input
           type="text"
           id="username"
@@ -39,7 +39,7 @@ function LogIn({ doLog, handleClick }) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password"> Password </label>
         <input
           type="password"
           id="password"

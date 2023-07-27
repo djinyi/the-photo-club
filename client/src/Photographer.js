@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function Photographer({id, name, year}){
     return(
-        <Card>
+        <Card className="flex-container">
             <img src="https://i.imgur.com/3Kdbmg4.png"/>
             <Container>
                 <h4><b>{name}</b></h4>
@@ -17,7 +17,14 @@ function Photographer({id, name, year}){
 export default Photographer;
 
 const Card = styled.div`
-    padding: 20px 20px 20px 16px;
+align-items: center;
+padding: 20px 20px 20px 16px;
+display: flex;
+flex-direction: row;
+    color:black;
+    margin: auto;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif
     border: 2px;
     border-color: black;
     transition: 0.3s;

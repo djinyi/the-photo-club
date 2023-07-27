@@ -1,13 +1,34 @@
 import React from "react";
+import styled from "styled-components";
 
 function Photographer({id, name, year}){
     return(
-        <div>
-            <p>name: {name}</p>
-            <p>year: {year}</p>
-        </div>
+        <Card>
+            <img src="https://i.imgur.com/3Kdbmg4.png"/>
+            <Container>
+                <h4><b>{name}</b></h4>
+                <p>{year} year</p>
+            </Container>
+        </Card>
 
     )
 }
 
 export default Photographer;
+
+const Card = styled.div`
+    padding: 20px 20px 20px 16px;
+    border: 2px;
+    border-color: black;
+    transition: 0.3s;
+    a:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    img {
+        width: 150px;
+    }
+`
+  
+const Container = styled.div`
+    padding: 2px 16px;
+`

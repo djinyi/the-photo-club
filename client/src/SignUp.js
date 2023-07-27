@@ -9,7 +9,9 @@ function SignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const history = useHistory();
-  const setUser = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
+
+  console.log(user)
   
   function handleSubmit(e) {
     e.preventDefault();

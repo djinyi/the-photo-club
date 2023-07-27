@@ -90,17 +90,13 @@ function App() {
   ))
 
 
-  function doLog(data){
-    setUser(data)
-  }
-
   return (
     <div>
       <Header />
       <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/home">
-          <Home setTheUser={setUser} doLog={doLog}/>
+          <Home setTheUser={setUser} />
         </Route>
         <Route exact path="/photographers">
           <Photographers addPhotographer={addPhotographer} students={students} />

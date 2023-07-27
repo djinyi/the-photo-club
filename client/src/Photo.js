@@ -42,18 +42,19 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
 
     return(
         <Detail>
-            <h2> {titled}</h2>
+            <h1> {titled}</h1>
             <img src={url} alt={description} width="500" />
             <p><b>medium:</b> {mediumd}</p>
             <p><b>year:</b> {yeard}</p>
             <p><b>description:</b> {descriptiond}</p>
             {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
-            <button onClick={handleDeleteClick}> Delete Post</button>
+            <button onClick={handleDeleteClick}> Delete </button>
             <p>
                 {errors.map((err) => (
                 <b key={err}>{err}!</b>
                 ))}
             </p>
+            <p>________________________</p>
         </Detail>
     )
 }

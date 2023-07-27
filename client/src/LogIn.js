@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "./user/UserContext";
 
-function LogIn({ doLog, handleClick }) {
+function LogIn({ handleClick }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   const history = useHistory();
+
+  console.log(user)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,7 +22,7 @@ function LogIn({ doLog, handleClick }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => doLog(data.username))
+        r.json().then((data) => setUser(data))
         .then(newPage())
       } 
     });

@@ -69,7 +69,7 @@ function handleSave(e){
           <p>
                 {errors.map((err) => (
                 <b key={err}>{err}!</b>
-                ))}
+                ))} Must be logged
             </p>
           </div>
     )

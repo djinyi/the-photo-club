@@ -4,22 +4,19 @@ import SignUp from "./SignUp";
 import { UserContext } from "./user/UserContext";
 import styled from "styled-components";
 
-function Home({ doLog }) {
+function Home() {
   const [login, setLogin] = useState(false)
-
   const user = useContext(UserContext)
-
-  console.log(user.user)
 
   function handleClick() {
     return setLogin((login) => !login)
   }
 
     if (user.user) {
-      return <Detail><p>Welcome, {user.user.username}!</p></Detail>;
+      return <Detail><p>Welcome, <b>{user.user.username}</b>!</p></Detail>;
     } else {
       return <Detail>
-        <p> {login? <div><SignUp /> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn doLog={doLog} handleClick={handleClick} />} </p>
+        <p> {login? <div><SignUp /> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn  handleClick={handleClick} />} </p>
       </Detail>
     }
   }

@@ -6,6 +6,8 @@ import { UserContext } from "./user/UserContext";
 function NavBar() {
   const {user, setUser} = useContext(UserContext)
 
+  console.log(user)
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -30,9 +32,9 @@ function NavBar() {
                 <p>Meet the Photographers</p>
             </NavLink>
             </li>
-            <li onClick={handleLogoutClick}> <NavLink exact to="/logout">
-            <p>{user? `${user.username} Profile` : "Logout"}</p>
-            </NavLink>
+            <li onClick={handleLogoutClick}> 
+            {user? <NavLink exact to="/logout"><p>Logout</p></NavLink> : <NavLink exact to="/login"><p>Login</p></NavLink> }
+            
             </li>
         </NavStyle>
     )

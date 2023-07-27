@@ -5,6 +5,7 @@ function Exhibits({ shows, addExhibit }){
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [date, setDate] = useState("");
+    const [errors, setErrors] = useState([]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -17,9 +18,14 @@ function Exhibits({ shows, addExhibit }){
             },
             body: JSON.stringify(formData)
         })
-        .then((r) => r.json())
-        .then((newPost) => addExhibit(newPost))
-        
+        .then((r) => {
+            if(r.ok) {
+                r.json().then((newPost) => addExhibit(newPost))
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+          });
+
         setName("");
         setLocation("");
         setDate("");
@@ -27,7 +33,14 @@ function Exhibits({ shows, addExhibit }){
 
     return(
         <Detail>
+            <h3> Exhibits </h3>
+            {shows}
         <h3> Submit a new exhibit! </h3>
+        <p>
+            {errors.map((err) => (
+            <b key={err}>{err}!</b>
+            ))}
+        </p>
         <form onSubmit={handleSubmit}>
             <label> Name </label>
             <input
@@ -52,7 +65,7 @@ function Exhibits({ shows, addExhibit }){
             /> 
             <button type="submit"> Submit </button>
             </form>
-            {shows}
+            <p> </p>
         </Detail>
     )
 }

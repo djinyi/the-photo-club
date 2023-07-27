@@ -27,6 +27,8 @@ function Photographers({ students, addPhotographer }){
 
     return(
         <Detail>
+        <h3> Our Photographers </h3>
+        {students}
         <h3> Submit a new photographer! </h3>
         <form onSubmit={handleSubmit}>
             <label> Name </label>
@@ -45,7 +47,8 @@ function Photographers({ students, addPhotographer }){
             />
             <button type="submit"> Submit </button>
             </form>
-        {students}
+            <p> </p>
+
         </Detail>
     )
 }

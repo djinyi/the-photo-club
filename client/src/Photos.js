@@ -10,6 +10,7 @@ function Photos({ photoList, addPhoto }){
     const [description, setDescription] = useState("");
     const [photographer_id, setPhotographer_id] = useState("");
     const [exhibit_id, setExhibit_id] = useState("");
+    const [errors, setErrors] = useState([]);
 
     const history = useHistory();
 
@@ -26,9 +27,14 @@ function Photos({ photoList, addPhoto }){
             },
             body: JSON.stringify(formData)
         })
-        .then((r) => r.json())
-        .then((newPost) => addPhoto(newPost))
-        
+        .then((r) => {
+            if(r.ok) {
+                r.json().then((newPost) => addPhoto(newPost))
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+          });
+
         setTitle("");
         setImage_url("");
         setYear("");
@@ -43,7 +49,14 @@ function Photos({ photoList, addPhoto }){
 
     return(
         <Detail>
+        <h3> Photo Gallery </h3>
+            {photoList}
         <h3> Submit a new submission! </h3>
+        <p>
+                {errors.map((err) => (
+                <b key={err}>{err}!</b>
+                ))}
+        </p>
         <form onSubmit={handleSubmit}>
             <label> Title </label>
             <input
@@ -82,22 +95,22 @@ function Photos({ photoList, addPhoto }){
             onChange={e => setDescription(e.target.value)}
             />
             <label> Photographer </label>
-            <input
-            type="text"
-            id="photographer"
-            value={photographer_id}
-            onChange={e => setPhotographer_id(e.target.value)}
-            />
+            <select onChange={e => setPhotographer_id(e.target.value)} name="photographer" id="photographer">
+                <option value="17">Lunis Loon</option>
+                <option value="18">Mile RazorBeak</option>
+                <option value="19">Kylo the Seedy</option>
+                <option value="20">R-10</option>
+            </select>
             <label> Exhibit </label>
-            <input
-            type="text"
-            id="exhibit"
-            value={exhibit_id}
-            onChange={e => setExhibit_id(e.target.value)}
-            />
+            <select onChange={e => setExhibit_id(e.target.value)} name="exhibit" id="exhibit">
+                <option value="13">The Southwest</option>
+                <option value="14">Thrifted Ideas</option>
+                <option value="15">Moments on Film</option>
+            </select>
             <button type="submit"> Submit </button>
             </form>
-            {photoList}
+ 
+            <p> </p>
         </Detail>
     )
 }
@@ -119,5 +132,5 @@ flex-direction:column;
 color:black;
 margin: auto;
 text-align: center;
-font-family: "Times New Roman", Times, serif
+font-family: "Times New Roman", Times, serif;
 `

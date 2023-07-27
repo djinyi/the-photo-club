@@ -28,14 +28,14 @@ function Photographers({ students, addPhotographer }){
         <div>
         <h3> Submit a new photographer! </h3>
         <form onSubmit={handleSubmit}>
-            <label>Name</label>
+            <label> Name </label>
             <input
             type="text"
             id="name"
             value={name}
             onChange={e => setName(e.target.value)}
             />
-            <label>Year</label>
+            <label> Year </label>
             <input
             type="text"
             id="year"

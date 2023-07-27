@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 function Exhibit({ id, name, location, date, photos }){
 
@@ -8,14 +9,20 @@ function Exhibit({ id, name, location, date, photos }){
         </div>
     ))
     return(
-        <div>
-            <h1>{name}</h1>
+        <Detail>
+            <h3>{name}</h3>
             <p> <b>location:</b> {location}</p>
             <p> <b>date:</b> {date}</p>
-            <h3> Photo Selections: </h3>
+            <h2> Photo Selections: </h2>
             {listPhotos}
-        </div>
+        </Detail>
     )
 }
 
 export default Exhibit;
+
+const Detail = styled.div`
+h3{
+    display: inline-block;
+}
+`

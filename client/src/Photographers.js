@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 function Photographers({ students, addPhotographer }){
     const [name, setName] = useState("");
@@ -25,7 +26,7 @@ function Photographers({ students, addPhotographer }){
     }
 
     return(
-        <div>
+        <Detail>
         <h3> Submit a new photographer! </h3>
         <form onSubmit={handleSubmit}>
             <label> Name </label>
@@ -45,8 +46,26 @@ function Photographers({ students, addPhotographer }){
             <button type="submit"> Submit </button>
             </form>
         {students}
-        </div>
+        </Detail>
     )
 }
 
 export default Photographers;
+
+const Detail = styled.div`
+h3{
+    font-size: 30px;
+    text-align: center;
+    padding: 25px 45px 25px 45px;
+    background-color: rgba(135, 206, 235, .2);
+}
+button{
+  margin:3px
+}
+display-direction:flex;
+flex-direction:column;
+color:black;
+margin: auto;
+text-align: center;
+font-family: "Times New Roman", Times, serif
+`

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Edit from "./Edit";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [titled, setTitled] = useState(title)
@@ -40,8 +41,8 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
       }
 
     return(
-        <div>
-            <h3> {titled}</h3>
+        <Detail>
+            <h2> {titled}</h2>
             <img src={url} alt={description} width="500" />
             <p><b>medium:</b> {mediumd}</p>
             <p><b>year:</b> {yeard}</p>
@@ -53,8 +54,17 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
                 <b key={err}>{err}!</b>
                 ))}
             </p>
-        </div>
+        </Detail>
     )
 }
 
 export default Photo;
+
+const Detail = styled.div`
+h2{
+    font-size: 25px;
+    text-align: center;
+    padding: 25px 45px 25px 45px;
+    background-color: rgba(135, 206, 235, .2);
+}
+`

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 function LogIn({ doLog, handleClick }) {
   const [username, setUsername] = useState("");
@@ -28,9 +29,9 @@ function LogIn({ doLog, handleClick }) {
   }
 
   return (
-    <div>
+    <Detail>
       <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h3>Login</h3>
         <label htmlFor="username"> Username </label>
         <input
           type="text"
@@ -50,8 +51,26 @@ function LogIn({ doLog, handleClick }) {
         <button type="submit">Login</button>
       </form>
       <p onClick={handleClick}>New user? <b>Create an account.</b></p>
-    </div>
+    </Detail>
   );
 }
 
 export default LogIn;
+
+const Detail = styled.div`
+h3{
+    font-size: 30px;
+    text-align: center;
+    padding: 25px 45px 25px 45px;
+    background-color: rgba(135, 206, 235, .2);
+}
+button{
+  margin:3px
+}
+display-direction:flex;
+flex-direction:column;
+color:black;
+margin: auto;
+text-align: center;
+font-family: "Times New Roman", Times, serif
+`

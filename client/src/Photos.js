@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 function Photos({ photoList, addPhoto }){
     const [title, setTitle] = useState("");
@@ -41,31 +42,31 @@ function Photos({ photoList, addPhoto }){
     }
 
     return(
-        <div>
+        <Detail>
         <h3> Submit a new submission! </h3>
         <form onSubmit={handleSubmit}>
-            <label>Title</label>
+            <label> Title </label>
             <input
             type="text"
             id="title"
             value={title}
             onChange={e => setTitle(e.target.value)}
             />
-            <label>Medium</label>
+            <label> Medium </label>
             <input
             type="text"
             id="medium"
             value={medium}
             onChange={e => setMedium(e.target.value)}
             />
-            <label>Image Url</label>
+            <label> Image Url </label>
             <input
             type="text"
             id="image"
             value={image_url}
             onChange={e => setImage_url(e.target.value)}
             />
-            <label>Year</label>
+            <label> Year </label>
             <input
             type="text"
             id="year"
@@ -73,21 +74,21 @@ function Photos({ photoList, addPhoto }){
             onChange={e => setYear(e.target.value)}
             placeholder="----"
             />
-            <label>Description</label>
+            <label> Description </label>
             <input
             type="text"
             id="description"
             value={description}
             onChange={e => setDescription(e.target.value)}
             />
-            <label>Photographer</label>
+            <label> Photographer </label>
             <input
             type="text"
             id="photographer"
             value={photographer_id}
             onChange={e => setPhotographer_id(e.target.value)}
             />
-            <label>Exhibit</label>
+            <label> Exhibit </label>
             <input
             type="text"
             id="exhibit"
@@ -97,8 +98,26 @@ function Photos({ photoList, addPhoto }){
             <button type="submit"> Submit </button>
             </form>
             {photoList}
-        </div>
+        </Detail>
     )
 }
 
 export default Photos;
+
+const Detail = styled.div`
+h3{
+    font-size: 30px;
+    text-align: center;
+    padding: 25px 45px 25px 45px;
+    background-color: rgba(135, 206, 235, .2);
+}
+button{
+  margin:3px
+}
+display-direction:flex;
+flex-direction:column;
+color:black;
+margin: auto;
+text-align: center;
+font-family: "Times New Roman", Times, serif
+`

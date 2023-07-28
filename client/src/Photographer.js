@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Photographer({id, name, year}){
     return(
         <Card className="flex-container">
-            <img src="https://i.imgur.com/3Kdbmg4.png"/>
+            <img src="https://i.imgur.com/3Kdbmg4.png" alt="avatar"/>
             <Container>
                 <h4><b>{name}</b></h4>
                 <p>{year} year</p>

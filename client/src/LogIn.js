@@ -2,11 +2,18 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./user/UserContext";
+import SignUp from "./SignUp"
 
-function LogIn({ handleClick }) {
+function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [login, setLogin] = useState(true)
+
+
+  function handleClick() {
+    return setLogin((login) => !login)
+  }
 
   const history = useHistory();
 
@@ -54,7 +61,7 @@ function LogIn({ handleClick }) {
         />
         <button type="submit">Login</button>
       </form>
-      <p onClick={handleClick}>New user? <b>Create an account.</b></p>
+      {/* {login? <p onClick={handleClick}>New user? <b>Create an account.</b></p>: <SignUp />} */}
     </Detail>
   );
 }

@@ -11,6 +11,7 @@ import Photo from "./Photo";
 import Header from "./Header";
 import LogOut from "./LogOut";
 import LogIn from "./LogIn";
+import SignUp from "./SignUp";
 
 
 function App() {
@@ -112,6 +113,9 @@ function App() {
         </Route>
         <Route exact path="/login">
         <LogIn  />
+        </Route>
+        <Route exact path="/signup">
+        <SignUp />
         </Route>
       </Switch>
     </div>

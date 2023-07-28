@@ -5,7 +5,7 @@ import { UserContext } from "./user/UserContext";
 import styled from "styled-components";
 
 function Home() {
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
   const user = useContext(UserContext)
 
   function handleClick() {
@@ -16,7 +16,7 @@ function Home() {
       return <Detail><p>Welcome, <b>{user.user.username}</b>!</p></Detail>;
     } else {
       return <Detail>
-        <p> {login? <div><SignUp /> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <LogIn  handleClick={handleClick} />} </p>
+        <p> {login? <div><SignUp /> <p>Already have an account? <b onClick={handleClick}>Log in.</b></p></div> : <div><LogIn /><p onClick={handleClick}>New user? <b>Create an account.</b></p></div>} </p>
       </Detail>
     }
   }

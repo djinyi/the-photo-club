@@ -38,7 +38,7 @@ function Exhibits({ shows, addExhibit }){
         <h3> Submit a new exhibit! </h3>
         <p>
             {errors.map((err) => (
-            <b key={err}>{err}!</b>
+            <b key={err}>{err}! Must be logged in.</b>
             ))}
         </p>
         <form onSubmit={handleSubmit}>

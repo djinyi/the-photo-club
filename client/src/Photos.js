@@ -54,7 +54,7 @@ function Photos({ photoList, addPhoto }){
         <h3> Submit a new submission! </h3>
         <p>
                 {errors.map((err) => (
-                <b key={err}>{err}!</b>
+                <b key={err}>{err}! Must be logged in.</b>
                 ))}
         </p>
         <form onSubmit={handleSubmit}>

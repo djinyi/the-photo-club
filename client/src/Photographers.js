@@ -4,6 +4,7 @@ import styled from "styled-components";
 function Photographers({ students, addPhotographer }){
     const [name, setName] = useState("");
     const [year, setYear] = useState("");
+    const [errors, setErrors] = useState([]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,9 +19,14 @@ function Photographers({ students, addPhotographer }){
             },
             body: JSON.stringify(formData)
         })
-        .then((r) => r.json())
-        .then((newPost) => addPhotographer(newPost))
-        
+        .then((r) => {
+            if(r.ok) {
+                r.json().then((newPost) => addPhotographer(newPost))
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+          });
+
         setName("");
         setYear("");
     }
@@ -30,6 +36,11 @@ function Photographers({ students, addPhotographer }){
         <h3> Our Photographers </h3>
         {students}
         <h3> Submit a new photographer! </h3>
+        <p>
+                {errors.map((err) => (
+                <b key={err}>{err}! Must be logged in.</b>
+                ))}
+        </p>
         <form onSubmit={handleSubmit}>
             <label> Name </label>
             <input

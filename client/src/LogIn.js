@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./user/UserContext";
-import SignUp from "./SignUp"
 
 function LogIn() {
   const [username, setUsername] = useState("");

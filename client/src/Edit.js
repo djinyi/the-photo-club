@@ -30,7 +30,7 @@ function handleSave(e){
       if(r.ok) {
         r.json().then((updated) => newEditing(updated));
       } else {
-        r.json().then((err) => setErrors(err.error));
+        r.json().then((err) => setErrors(err.errors));
     }
     });
 

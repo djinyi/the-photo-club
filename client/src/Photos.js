@@ -40,8 +40,6 @@ function Photos({ photoList, addPhoto }){
         setYear("");
         setDescription("");
         setMedium("");
-        setPhotographer_id("");
-        setExhibit_id("");
 
         history.push('/photos')
         

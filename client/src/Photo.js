@@ -21,7 +21,7 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
             if(r.ok) {
                 r.json().then(onDeletePost(id))
             } else {
-                r.json().then((err) => setErrors(err.error));
+                r.json().then((err) => setErrors(err.errors));
             }
         history.push('/photos')
      })

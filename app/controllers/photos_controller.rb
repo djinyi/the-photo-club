@@ -63,7 +63,7 @@ class PhotosController < ApplicationController
     end
     
     def not_authorized
-        render json: {error: "Not authorized."}, status: :unprocessable_entity
+        render json: {errors: "Not authorized."}, status: :unprocessable_entity
     end
 
     def render_unprocessable_entity_response(invalid)

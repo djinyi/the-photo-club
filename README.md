@@ -18,4 +18,4 @@ They must have a unique username when signing in and when logging in, they must 
 
 Note that users can only edit or delete their own photo submissions. They are not authorized to make changes to other users' entries.
 
-![editdeleteerror](https://i.imgur.com/MPLN6TS.gif)
+![editdeleteerror](https://i.imgur.com/vyMS3jC.gif)

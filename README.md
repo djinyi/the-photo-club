@@ -6,9 +6,15 @@ Visitors of the page can view the Photo Club's members, its photo gallery, and t
 
 
 
-Users must log in or sign up to submit their own photos, ongoing exhibits, or new photographers. They must have a unique username when signing in and when logging in, they must also make sure to have the correct password.
+Users must log in or sign up to submit their own photos, ongoing exhibits, or new photographers. 
 
+![signin](https://i.imgur.com/ZJSwkVS.gif)
 
+They must have a unique username when signing in and when logging in, they must also make sure to have the correct password.
+
+![loginerror](https://i.imgur.com/LmRbXH7.gif)
+
+![signinerror](https://i.imgur.com/nGFEjEM.gif)
 
 Note that users can only edit or delete their own photo submissions. They are not authorized to make changes to other users' entries.
 

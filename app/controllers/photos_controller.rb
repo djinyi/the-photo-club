@@ -29,21 +29,21 @@ class PhotosController < ApplicationController
 
     def update
         photo = find_photo
-        if photo
+        if @current_user.photos.include?(photo)
             photo.update!(photo_params)
             render json: photo, status: :ok
         else
-            render_not_found_response
+            not_authorized
         end
     end
 
     def destroy
         photo = find_photo
-        if photo
+        if @current_user.photos.include?(photo)
             photo.destroy
             render json: {}, head: :no_content
         else
-            render_not_found_response
+            not_authorized
         end
     end
 
@@ -60,6 +60,10 @@ class PhotosController < ApplicationController
 
     def render_not_found_response
         render json: {error: "Photo Not Found"}, status: :not_found
+    end
+    
+    def not_authorized
+        render json: {error: "Not authorized."}, status: :unprocessable_entity
     end
 
     def render_unprocessable_entity_response(invalid)

@@ -8,8 +8,8 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [descriptiond, setDescriptiond] = useState(description)
     const [yeard, setYeard] = useState(year)
     const [mediumd, setMediumd] = useState(medium)
-    const [errors, setErrors] = useState([]);
     const [edit, setEdit] = useState(true);
+    const [errors, setErrors] = useState([]);
 
     const history = useHistory();
 
@@ -19,14 +19,13 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(onDeletePost(id));
+                r.json().then(onDeletePost(id))
             } else {
-                r.json().then((err) => setErrors(err.errors));
+                r.json().then((err) => setErrors(err.error));
             }
-        });
-
         history.push('/photos')
-     }
+     })
+    }
 
      function newEditing(updated) {
         setTitled(updated.title)
@@ -47,12 +46,10 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
             <p><b>medium:</b> {mediumd}</p>
             <p><b>year:</b> {yeard}</p>
             <p><b>description:</b> {descriptiond}</p>
-            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setCDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
+            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
             <button onClick={handleDeleteClick}> Delete </button>
             <p>
-                {errors.map((err) => (
-                <b key={err}>{err}!</b>
-                ))}
+                <b>{errors}</b>
             </p>
             <p>________________________</p>
         </Detail>

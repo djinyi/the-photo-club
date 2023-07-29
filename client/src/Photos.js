@@ -96,6 +96,7 @@ function Photos({ photoList, addPhoto }){
             />
             <label> Photographer </label>
             <select onChange={e => setPhotographer_id(e.target.value)} name="photographer" id="photographer">
+                <option> </option>
                 <option value="17">Lunis Loon</option>
                 <option value="18">Mile RazorBeak</option>
                 <option value="19">Kylo the Seedy</option>
@@ -103,6 +104,7 @@ function Photos({ photoList, addPhoto }){
             </select>
             <label> Exhibit </label>
             <select onChange={e => setExhibit_id(e.target.value)} name="exhibit" id="exhibit">
+                <option> </option>
                 <option value="13">The Southwest</option>
                 <option value="14">Thrifted Ideas</option>
                 <option value="15">Moments on Film</option>

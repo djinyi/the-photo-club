@@ -7,10 +7,9 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
-
   console.log(user)
   
   function handleSubmit(e) {
@@ -28,20 +27,27 @@ function SignUp() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-      }
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+    }
     });
 
     setUsername("");
     setPassword("");
     setPasswordConfirmation("");
 
-    history.push('/photos')
+    history.push('/home')
   }
 
   return (
     <Detail>
       <form onSubmit={handleSubmit}>
         <h3>Sign Up</h3>
+        <p>
+                  {errors.map((err) => (
+                  <b key={err}>{err}!</b>
+                  ))}
+        </p>
         <label htmlFor="username"> Username </label>
         <input
           type="text"

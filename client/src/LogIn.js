@@ -8,12 +8,7 @@ function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
-  const [login, setLogin] = useState(true)
 
-
-  function handleClick() {
-    return setLogin((login) => !login)
-  }
 
   const history = useHistory();
 

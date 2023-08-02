@@ -12,6 +12,7 @@ import Header from "./Header";
 import LogOut from "./LogOut";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
+import PhotoPage from "./PhotoPage";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
     .then(data => setExhibits(data))
   }, []);
 
+  console.log(photos)
   function addPhotographer(newPhotog) {
     setPhotographers([...photographers, newPhotog])
   }
@@ -106,8 +108,11 @@ function App() {
           <Exhibits addExhibit={addExhibit} shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
-          <Photos photoList={photoList} addPhoto={addPhoto} />
+          <Photos photoList={photoList} addPhoto={addPhoto} photos={photos} />
         </Route>
+        <Route path='/photos/:id'>
+    		  <PhotoPage photos={photos} />
+    	  </Route>
         <Route exact path="/logout">
           <LogOut />
         </Route>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Edit from "./Edit";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
+import PhotoPage from "./PhotoPage";
 
 function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [titled, setTitled] = useState(title)
@@ -12,6 +13,8 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
     const [errors, setErrors] = useState([]);
 
     const history = useHistory();
+    const match = useRouteMatch();
+    console.log(match);
 
     function handleDeleteClick() {
         fetch(`/photos/${id}`, {
@@ -52,6 +55,9 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
                 <b>{errors}</b>
             </p>
             <p>________________________</p>
+            <Route path={`${match.url}/:id`}>
+        <PhotoPage title={title} id={id}/>
+      </Route>
         </Detail>
     )
 }

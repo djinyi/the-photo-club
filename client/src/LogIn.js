@@ -7,6 +7,7 @@ function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [errors, setErrors] = useState([]);
 
 
   const history = useHistory();
@@ -24,8 +25,11 @@ function LogIn() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((data) => setUser(data))
-        .then(newPage())
-      } 
+      } else {
+        r.json().then((err) => setErrors(err.error));
+    }
+
+    newPage();
     });
   }
 
@@ -37,6 +41,9 @@ function LogIn() {
     <Detail>
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
+        <p>
+                <b>{errors}</b>
+        </p>
         <label htmlFor="username"> Username </label>
         <input
           type="text"

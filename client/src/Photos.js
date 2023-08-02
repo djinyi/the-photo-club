@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Photos({ photoList, addPhoto }){
+function Photos({ photoList, addPhoto, photos }){
     const [title, setTitle] = useState("");
     const [image_url, setImage_url] = useState("");
     const [year, setYear] = useState("");
@@ -44,6 +44,13 @@ function Photos({ photoList, addPhoto }){
         history.push('/photos')
         
     }
+    
+    let pho = photos.map((photo) => (
+        <div key={photo.id}>
+            <p><Link to= {`/photos/${photo.id}`}>{photo.title}</Link></p>
+        </div>
+    ))
+
 
     return(
         <Detail>
@@ -52,8 +59,8 @@ function Photos({ photoList, addPhoto }){
         <h3> Submit a new submission! </h3>
         <p>
                 {errors.map((err) => (
-                <b key={err}>{err}! Must be logged in.</b>
-                ))}
+                    <b key={err}>{err}! Must be logged in.</b>
+                    ))}
         </p>
         <form onSubmit={handleSubmit}>
             <label> Title </label>
@@ -109,7 +116,8 @@ function Photos({ photoList, addPhoto }){
             </select>
             <button type="submit"> Submit </button>
             </form>
- 
+            <h3>Index</h3> 
+            {pho}
             <p> </p>
         </Detail>
     )

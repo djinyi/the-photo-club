@@ -5,7 +5,9 @@ import styled from "styled-components";
 function PhotoPage({ photos }){
     const { id } = useParams();
 
+    let list = 
 
+console.log(photos)
     return(
         <Detail>
         {photos

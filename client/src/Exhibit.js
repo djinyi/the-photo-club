@@ -3,7 +3,7 @@ import React from "react";
 function Exhibit({ id, name, location, date, photos }){
 
     let listPhotos = photos.map((photo) => (
-        <div>
+        <div key={photo.id}>
         <p><i>{photo.title} ({photo.year})</i> by {photo.photographer.name}</p>
         </div>
     ))

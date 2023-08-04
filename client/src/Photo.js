@@ -4,17 +4,12 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, onDeletePost}){
-    const [titled, setTitled] = useState(title)
-    const [descriptiond, setDescriptiond] = useState(description)
-    const [yeard, setYeard] = useState(year)
-    const [mediumd, setMediumd] = useState(medium)
+function Photo({ title, url, id , description, year, medium, onDeletePost, titled, descriptiond, yeard, mediumd, setTitled, setDescriptiond, setYeard, setMediumd }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
 
     const history = useHistory();
     const match = useRouteMatch();
-    console.log(match);
 
     function handleDeleteClick() {
         fetch(`/photos/${id}`, {
@@ -46,9 +41,9 @@ function Photo({ title, url, id , description, year, medium, onDeletePost}){
         <Detail>
             <h1> {titled}</h1>
             <img src={url} alt={description} width="500" />
-            <p><b>medium:</b> {mediumd}</p>
-            <p><b>year:</b> {yeard}</p>
-            <p><b>description:</b> {descriptiond}</p>
+            <p><b>medium:</b> {medium}</p>
+            <p><b>year:</b> {year}</p>
+            <p><b>description:</b> {description}</p>
             {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
             <button onClick={handleDeleteClick}> Delete </button>
             <p>

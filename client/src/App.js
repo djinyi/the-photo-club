@@ -20,10 +20,6 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [exhibits, setExhibits] = useState([]);
   const [user, setUser] = useState(null);
-  const [titled, setTitled] = useState("update title")
-  const [descriptiond, setDescriptiond] = useState("update description")
-  const [yeard, setYeard] = useState("update year")
-  const [mediumd, setMediumd] = useState("update medium")
   
   useEffect(() => {
     fetch("/photographers")
@@ -41,7 +37,7 @@ function App() {
     fetch("/exhibits")
     .then((r) => r.json())
     .then(data => setExhibits(data))
-  }, [photos, titled, descriptiond, yeard, mediumd]);
+  }, [photos]);
 
   console.log(exhibits)
   function addPhotographer(newPhotog) {
@@ -81,14 +77,6 @@ function App() {
       year = {photo.year}
       description = {photo.description}
       medium = {photo.medium}
-      titled = {titled}
-      yeard = {yeard}
-      descriptiond = {descriptiond}
-      mediumd = {mediumd}
-      setTitled = {setTitled}
-      setYeard = {setYeard}
-      setDescriptiond = {setDescriptiond}
-      setMediumd = {setMediumd}
       onDeletePost={handleDeletePost} />
   ))
   

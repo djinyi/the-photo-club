@@ -4,9 +4,13 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, onDeletePost, titled, descriptiond, yeard, mediumd, setTitled, setDescriptiond, setYeard, setMediumd }){
+function Photo({ title, url, id , description, year, medium, onDeletePost }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
+    const [titled, setTitled] = useState(title)
+    const [descriptiond, setDescriptiond] = useState(description)
+    const [yeard, setYeard] = useState(year)
+    const [mediumd, setMediumd] = useState(medium)
 
     const history = useHistory();
     const match = useRouteMatch();

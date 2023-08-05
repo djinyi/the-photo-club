@@ -44,11 +44,11 @@ function Photo({ title, url, id , description, year, medium, onDeletePost }){
     return(
         <Detail>
             <h1> {titled}</h1>
-            <img src={url} alt={description} width="500" />
-            <p><b>medium:</b> {medium}</p>
-            <p><b>year:</b> {year}</p>
-            <p><b>description:</b> {description}</p>
-            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} descriptiond={descriptiond} setDescriptiond={setDescriptiond} yeard={yeard} setYeard={setYeard} />}
+            <img src={url} alt={descriptiond} width="500" />
+            <p><b>medium:</b> {mediumd}</p>
+            <p><b>year:</b> {yeard}</p>
+            <p><b>description:</b> {descriptiond}</p>
+            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} yeard={yeard} setYeard={setYeard} descriptiond={descriptiond} setDescriptiond = {setDescriptiond}/>}
             <button onClick={handleDeleteClick}> Delete </button>
             <p>
                 <b>{errors}</b>

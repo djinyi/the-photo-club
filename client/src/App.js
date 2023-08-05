@@ -13,6 +13,7 @@ import LogOut from "./LogOut";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import PhotoPage from "./PhotoPage";
+import _ from 'lodash';
 
 
 function App() {
@@ -27,17 +28,17 @@ function App() {
     .then(data => setPhotographers(data))
   }, []);
 
-  useEffect(() => {
-    fetch("/photos")
-    .then((r) => r.json())
-    .then(data => setPhotos(data))
-  }, []);
+  // useEffect(() => {
+  //   fetch("/photos")
+  //   .then((r) => r.json())
+  //   .then(data => setPhotos(data))
+  // }, []);
 
   useEffect(() => {
     fetch("/exhibits")
     .then((r) => r.json())
     .then(data => setExhibits(data))
-  }, [photos]);
+  }, []);
 
   console.log(exhibits)
   function addPhotographer(newPhotog) {
@@ -47,6 +48,25 @@ function App() {
   function addExhibit(newExhibit){
     setExhibits([...exhibits, newExhibit])
   }
+
+  let it = exhibits.filter((exhibit) => exhibit.photos.length > 0)
+  let sit = it.map((exhibit) => exhibit.photos)
+ let nit = sit.map((photo) => photo.map((like) => like))
+ console.log(nit)
+  // function updateExhibit(updated){
+  //   // let list = exhibits.filter((exhibit) => {
+  //   //   let item = exhibit.photos.map((photo) =>{
+  //   //     if(photo.id == updated.id){
+  //   //       return({...photo, ...updated})
+  //   //     }
+  //   //   })
+  //   //   return item;
+  //   //   console.log(item)
+  //   // })
+  //   // console.log(list)
+  //   let shit = exhibits.filter((exhibit) => exhibit.)
+  // }
+
   
   function addPhoto(newPost){
     console.log(newPost)
@@ -68,7 +88,7 @@ function App() {
     />
     ))
     
-  let photoList = photos.map((photo) => (
+  let photoList = nit.flat().map((photo) => (
     <Photo
       key = {photo.id}
       id = {photo.id}
@@ -77,7 +97,8 @@ function App() {
       year = {photo.year}
       description = {photo.description}
       medium = {photo.medium}
-      onDeletePost={handleDeletePost} />
+      onDeletePost={handleDeletePost}
+  />
   ))
   
 

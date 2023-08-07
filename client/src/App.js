@@ -13,14 +13,12 @@ import LogOut from "./LogOut";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import PhotoPage from "./PhotoPage";
-import _ from 'lodash';
-
 
 function App() {
   const [photographers, setPhotographers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [exhibits, setExhibits] = useState([]);
-  const [user, setUser] = useState(null);
+  const [trick, setTrick] = useState("")
   
   useEffect(() => {
     fetch("/photographers")
@@ -28,17 +26,18 @@ function App() {
     .then(data => setPhotographers(data))
   }, []);
 
-  // useEffect(() => {
-  //   fetch("/photos")
-  //   .then((r) => r.json())
-  //   .then(data => setPhotos(data))
-  // }, []);
+  useEffect(() => {
+    fetch("/photos")
+    .then((r) => r.json())
+    .then(data => setPhotos(data))
+  }, []);
 
   useEffect(() => {
     fetch("/exhibits")
     .then((r) => r.json())
     .then(data => setExhibits(data))
-  }, []);
+    // .then(() => setPho())
+  }, [trick]);
 
   console.log(exhibits)
   function addPhotographer(newPhotog) {
@@ -49,10 +48,12 @@ function App() {
     setExhibits([...exhibits, newExhibit])
   }
 
-  let it = exhibits.filter((exhibit) => exhibit.photos.length > 0)
-  let sit = it.map((exhibit) => exhibit.photos)
- let nit = sit.map((photo) => photo.map((like) => like))
- console.log(nit)
+//   function setPho(){
+//     let it = exhibits.filter((exhibit) => exhibit.photos.length > 0)
+//   let sit = it.map((exhibit) => exhibit.photos)
+//  let nit = sit.map((photo) => photo.map((like) => like))
+//  setPhotos(nit.flat())
+// console.log(exhibits)}
   // function updateExhibit(updated){
   //   // let list = exhibits.filter((exhibit) => {
   //   //   let item = exhibit.photos.map((photo) =>{
@@ -67,16 +68,19 @@ function App() {
   //   let shit = exhibits.filter((exhibit) => exhibit.)
   // }
 
-  
+  console.log(photos)
   function addPhoto(newPost){
     console.log(newPost)
     setPhotos([...photos, newPost])
+    setTrick(newPost)
+    console.log(photos)
   }
 
   function handleDeletePost(id) {
     console.log(id)
     const updatedPosts = photos.filter((posted) => posted.id !== id);
     setPhotos(updatedPosts)
+    setTrick(id)
 }
   
   let students = photographers.map((photographer) => (
@@ -88,7 +92,7 @@ function App() {
     />
     ))
     
-  let photoList = nit.flat().map((photo) => (
+  let photoList = photos.map((photo) => (
     <Photo
       key = {photo.id}
       id = {photo.id}
@@ -98,6 +102,7 @@ function App() {
       description = {photo.description}
       medium = {photo.medium}
       onDeletePost={handleDeletePost}
+      setTrick = {setTrick}
   />
   ))
   
@@ -117,10 +122,10 @@ function App() {
   return (
     <div>
       <Header />
-      <NavBar user={user} setUser={setUser} />
+      <NavBar setTrick={setTrick}/>
       <Switch>
         <Route exact path="/home">
-          <Home setTheUser={setUser} />
+          <Home />
         </Route>
         <Route exact path="/photographers">
           <Photographers addPhotographer={addPhotographer} students={students} />

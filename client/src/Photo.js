@@ -4,7 +4,7 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, onDeletePost }){
+function Photo({ title, url, id , description, year, medium, onDeletePost, setTrick }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
     const [titled, setTitled] = useState(title)
@@ -34,6 +34,7 @@ function Photo({ title, url, id , description, year, medium, onDeletePost }){
         setDescriptiond(updated.description)
         setYeard(updated.year)
         setMediumd(updated.medium)
+        setTrick("three")
 
     }
 

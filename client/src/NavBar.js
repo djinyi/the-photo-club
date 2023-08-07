@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./user/UserContext";
 
-function NavBar() {
+function NavBar({ setTrick }) {
   const {user, setUser} = useContext(UserContext)
 
   console.log(user)
@@ -16,6 +16,10 @@ function NavBar() {
     });
   }
 
+  function handleClick(){
+    setTrick(1)
+  }
+
     return (
         <NavStyle>
             <li><NavLink exact to="/home">
@@ -23,7 +27,7 @@ function NavBar() {
             </NavLink>
             </li>
             <li><NavLink exact to="/photos">
-                <p>Photo Submissions</p>
+                <p onClick={handleClick}>Photo Submissions</p>
             </NavLink></li>
             <li><NavLink exact to="/exhibits">
                 <p>Student Exhibits</p>

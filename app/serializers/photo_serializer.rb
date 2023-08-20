@@ -3,4 +3,5 @@ class PhotoSerializer < ActiveModel::Serializer
 
   belongs_to :photographer
   belongs_to :exhibit
+
 end

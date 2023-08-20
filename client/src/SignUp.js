@@ -44,9 +44,7 @@ function SignUp() {
       <form onSubmit={handleSubmit}>
         <h3>Sign Up</h3>
         <p>
-                  {errors.map((err) => (
-                  <b key={err}>{err}!</b>
-                  ))}
+                  {errors}
         </p>
         <label htmlFor="username"> Username </label>
         <input

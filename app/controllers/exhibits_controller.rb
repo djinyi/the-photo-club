@@ -1,5 +1,6 @@
 class ExhibitsController < ApplicationController
-    skip_before_action :authorize, only: :index
+    skip_before_action :authorize, only: [:index, :destroy]
+    wrap_parameters format: []
 
     def index
         exhibits = Exhibit.all
@@ -25,5 +26,9 @@ class ExhibitsController < ApplicationController
 
     def exhibit_params
         params.permit(:name, :location, :date)
+    end
+
+    def render_not_found_response
+        render json: {error: "Exhibit Not Found"}, status: :not_found
     end
 end

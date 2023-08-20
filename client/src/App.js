@@ -7,7 +7,6 @@ import Exhibit from "./Exhibit";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import Photos from "./Photos";
-import Photo from "./Photo";
 import Header from "./Header";
 import LogOut from "./LogOut";
 import LogIn from "./LogIn";
@@ -16,9 +15,8 @@ import PhotoPage from "./PhotoPage";
 
 function App() {
   const [photographers, setPhotographers] = useState([]);
-  const [photos, setPhotos] = useState([]);
+  // const [photos, setPhotos] = useState([]);
   const [exhibits, setExhibits] = useState([]);
-  const [trick, setTrick] = useState("")
   
   useEffect(() => {
     fetch("/photographers")
@@ -26,18 +24,17 @@ function App() {
     .then(data => setPhotographers(data))
   }, []);
 
-  useEffect(() => {
-    fetch("/photos")
-    .then((r) => r.json())
-    .then(data => setPhotos(data))
-  }, []);
+  // useEffect(() => {
+  //   fetch("/photos")
+  //   .then((r) => r.json())
+  //   .then(data => setPhotos(data))
+  // }, []);
 
   useEffect(() => {
     fetch("/exhibits")
     .then((r) => r.json())
     .then(data => setExhibits(data))
-    // .then(() => setPho())
-  }, [trick]);
+  }, []);
 
   console.log(exhibits)
   function addPhotographer(newPhotog) {
@@ -48,39 +45,45 @@ function App() {
     setExhibits([...exhibits, newExhibit])
   }
 
-//   function setPho(){
-//     let it = exhibits.filter((exhibit) => exhibit.photos.length > 0)
-//   let sit = it.map((exhibit) => exhibit.photos)
-//  let nit = sit.map((photo) => photo.map((like) => like))
-//  setPhotos(nit.flat())
-// console.log(exhibits)}
-  // function updateExhibit(updated){
-  //   // let list = exhibits.filter((exhibit) => {
-  //   //   let item = exhibit.photos.map((photo) =>{
-  //   //     if(photo.id == updated.id){
-  //   //       return({...photo, ...updated})
-  //   //     }
-  //   //   })
-  //   //   return item;
-  //   //   console.log(item)
-  //   // })
-  //   // console.log(list)
-  //   let shit = exhibits.filter((exhibit) => exhibit.)
-  // }
 
-  console.log(photos)
+  // console.log(photos)
   function addPhoto(newPost){
-    console.log(newPost)
-    setPhotos([...photos, newPost])
-    setTrick(newPost)
-    console.log(photos)
+    // console.log(newPost)
+    let newList = exhibits.filter((exhibit) => exhibit.id !== newPost.exhibit.id)
+    // let soloExhibit = exhibits.filter((exhibit) => exhibit.id == newPost.exhibit.id)
+    // console.log(newList)
+    // let tryer = exhibits.filter((exhibit) => exhibit.id == newPost.exhibit.id)
+    //return the exhibit of the new photo
+    // console.log(tryer[0].photos)
+    // //add new photo to exhibit's photos
+    // let newExhibitPhotos = ([...tryer[0].photos, newPost])
+    let combined = exhibits.filter((exhibit) => {
+      if(exhibit.id == newPost.exhibit.id){
+        let news = ([...exhibit.photos, newPost])
+        return exhibit.photos = news
+      }
+    })
+
+    setExhibits([...newList, ...combined])
   }
 
-  function handleDeletePost(id) {
-    console.log(id)
-    const updatedPosts = photos.filter((posted) => posted.id !== id);
-    setPhotos(updatedPosts)
-    setTrick(id)
+  function handleDeletePost(id, exhibit_id) {
+
+    let withOut = exhibits.filter((exhibit) => {
+      console.log(exhibit.photos)
+      if(exhibit.id !== exhibit_id){
+        return exhibit
+      }})
+
+    let withr = exhibits.filter((exhibit) => {
+      if(exhibit.id == exhibit_id){
+        console.log(exhibit.photos)
+        let newPhotos= exhibit.photos.filter((photo) => photo.id !== id)
+        return exhibit.photos = newPhotos
+      }
+    })
+
+    setExhibits([...withOut, ...withr])
 }
   
   let students = photographers.map((photographer) => (
@@ -92,37 +95,43 @@ function App() {
     />
     ))
     
-  let photoList = photos.map((photo) => (
-    <Photo
-      key = {photo.id}
-      id = {photo.id}
-      title = {photo.title}
-      url = {photo.image_url} 
-      year = {photo.year}
-      description = {photo.description}
-      medium = {photo.medium}
-      onDeletePost={handleDeletePost}
-      setTrick = {setTrick}
-  />
-  ))
+  // let photoList = photos.map((photo) => (
+  //   <Photo
+  //     key = {photo.id}
+  //     id = {photo.id}
+  //     title = {photo.title}
+  //     url = {photo.image_url} 
+  //     year = {photo.year}
+  //     description = {photo.description}
+  //     medium = {photo.medium}
+  //     onDeletePost={handleDeletePost}
+  //     setTrick = {setTrick}
+  // />
+  // ))
   
 
-  let listExhibits = exhibits.map((exhibits) => (
+  let listExhibits = exhibits.map((exhibit) => (
     <Exhibit
-    key = {exhibits.id}
-    id = {exhibits.id}
-    name = {exhibits.name}
-    location = {exhibits.location}
-    date = {exhibits.date}
-    photos = {exhibits.photos}
+    key = {exhibit.id}
+    id = {exhibit.id}
+    name = {exhibit.name}
+    location = {exhibit.location}
+    date = {exhibit.date}
+    photos = {exhibit.photos}
     />
   ))
+
+ let photos = exhibits.map((exhibit) => exhibit.photos).flat()
+
+ console.log(photos)
+
+ 
 
 
   return (
     <div>
       <Header />
-      <NavBar setTrick={setTrick}/>
+      <NavBar />
       <Switch>
         <Route exact path="/home">
           <Home />
@@ -134,7 +143,7 @@ function App() {
           <Exhibits addExhibit={addExhibit} shows={listExhibits} />
         </Route>
         <Route exact path="/photos">
-          <Photos photoList={photoList} addPhoto={addPhoto} photos={photos} />
+          <Photos handleDeletePost = {handleDeletePost} addPhoto={addPhoto} photos={photos} />
         </Route>
         <Route path='/photos/:id'>
     		  <PhotoPage photos={photos} />

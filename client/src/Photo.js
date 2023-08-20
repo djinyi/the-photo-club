@@ -4,7 +4,7 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, onDeletePost, setTrick }){
+function Photo({ title, url, id , description, year, medium, exhibit_id, onDeletePost }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
     const [titled, setTitled] = useState(title)
@@ -21,7 +21,7 @@ function Photo({ title, url, id , description, year, medium, onDeletePost, setTr
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(onDeletePost(id))
+                r.json().then(onDeletePost(id, exhibit_id))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -34,7 +34,6 @@ function Photo({ title, url, id , description, year, medium, onDeletePost, setTr
         setDescriptiond(updated.description)
         setYeard(updated.year)
         setMediumd(updated.medium)
-        setTrick("three")
 
     }
 

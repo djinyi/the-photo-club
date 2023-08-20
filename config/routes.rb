@@ -2,11 +2,9 @@ Rails.application.routes.draw do
   # get "/photographers", to: "photographers#index"
   # get "/photographers/:id", to: "photographer#show"
   # get "/photos", to: "photos#index"
-  resources :photographers do
-    resources :photos
-  end
+  resources :photographers
 
-  resources :exhibits
+  resources :exhibits, only: [:index, :create, :destroy]
   resources :photos
   resources :user
   # get "/exhibits", to: "exhibits#index"

@@ -1,7 +1,7 @@
 class PhotographersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
-    skip_before_action :authorize, only: :index
+    skip_before_action :authorize, only: [:index]
 
     def index
         photographers = Photographer.all
@@ -19,7 +19,7 @@ class PhotographersController < ApplicationController
 
     def create 
         photographer = Photographer.create!(photographer_params)
-        render json: photographer, include: ['photos'], status: :created
+        render json: photographer, status: :created
     end
 
     def update
@@ -58,7 +58,7 @@ class PhotographersController < ApplicationController
     end
 
     def render_unprocessable_entity_response(invalid)
-        render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
+        render json: {errors: "invalid.record.errors.full_messages"}, status: :unprocessable_entity
     end
 
 

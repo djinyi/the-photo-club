@@ -4,12 +4,7 @@ class PhotosController < ApplicationController
     skip_before_action :authorize, only: [:index, :show]
 
     def index
-        if params[:photographer_id]
-            photographer = Photographer(params[:photographer_id])
-            photos = photographer.photos
-        else
-            photos = Photo.all
-        end
+        photos = Photo.all
         render json: photos, include: :photographer, status: :ok
     end
 
@@ -23,13 +18,13 @@ class PhotosController < ApplicationController
     end
 
     def create
-        photo = @current_user.photos.create(photo_params)
+        photo = @current_user.photos.create!(photo_params)
         render json: photo, status: :created
     end
 
     def update
         photo = find_photo
-        if @current_user.photos.include?(photo)
+        if photo
             photo.update!(photo_params)
             render json: photo, status: :ok
         else
@@ -39,7 +34,7 @@ class PhotosController < ApplicationController
 
     def destroy
         photo = find_photo
-        if @current_user.photos.include?(photo)
+        if photo
             photo.destroy
             render json: {}, head: :no_content
         else
@@ -55,7 +50,7 @@ class PhotosController < ApplicationController
     end
 
     def find_photo
-        Photo.find_by(id: params[:id])
+        @current_user.photos.find_by(id: params[:id])
     end
 
     def render_not_found_response

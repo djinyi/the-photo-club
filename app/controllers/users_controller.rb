@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     end
 
     def record_error
-        render json: {errors: ["Username already taken"]}, status: :unprocessable_entity
+        render json: {errors: "Password can't be blank, Username can't be blank, Username is too short (minimum is 2 characters)"}, status: :unprocessable_entity
     end
 
 

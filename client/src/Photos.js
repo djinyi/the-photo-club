@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 import Photo from "./Photo";
 
-function Photos({ addPhoto, photos, handleDeletePost }){
+function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
     const [title, setTitle] = useState("");
     const [image_url, setImage_url] = useState("");
     const [year, setYear] = useState("");
@@ -63,6 +63,8 @@ function Photos({ addPhoto, photos, handleDeletePost }){
       medium = {photo.medium}
       exhibit_id= {photo.exhibit_id}
       onDeletePost={handleDeletePost}
+      addEdits = {addEdits}
+      photographer_id = {photo.photographer_id}
   />
   ))
 

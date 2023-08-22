@@ -4,7 +4,7 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, exhibit_id, onDeletePost }){
+function Photo({ title, url, id , description, year, medium, exhibit_id, photographer_id, onDeletePost, addEdits }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
     const [titled, setTitled] = useState(title)
@@ -21,7 +21,7 @@ function Photo({ title, url, id , description, year, medium, exhibit_id, onDelet
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(onDeletePost(id, exhibit_id))
+                r.json().then(onDeletePost(id, exhibit_id, photographer_id))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -29,11 +29,12 @@ function Photo({ title, url, id , description, year, medium, exhibit_id, onDelet
      })
     }
 
-     function newEditing(updated) {
+     function newEditing(updated, exhibit_id) {
         setTitled(updated.title)
         setDescriptiond(updated.description)
         setYeard(updated.year)
         setMediumd(updated.medium)
+        addEdits(updated, exhibit_id)
 
     }
 
@@ -48,7 +49,7 @@ function Photo({ title, url, id , description, year, medium, exhibit_id, onDelet
             <p><b>medium:</b> {mediumd}</p>
             <p><b>year:</b> {yeard}</p>
             <p><b>description:</b> {descriptiond}</p>
-            {edit? <button onClick={handleClick}> Edit</button> : <Edit id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} yeard={yeard} setYeard={setYeard} descriptiond={descriptiond} setDescriptiond = {setDescriptiond}/>}
+            {edit? <button onClick={handleClick}> Edit</button> : <Edit exhibit_id={exhibit_id} id={id} newEditing={newEditing} titled={titled} setTitled={setTitled} mediumd={mediumd} setMediumd={setMediumd} yeard={yeard} setYeard={setYeard} descriptiond={descriptiond} setDescriptiond = {setDescriptiond}/>}
             <button onClick={handleDeleteClick}> Delete </button>
             <p>
                 <b>{errors}</b>

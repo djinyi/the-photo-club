@@ -3,7 +3,7 @@ import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 
 
-function Edit({id, newEditing, titled, setTitled, mediumd, setMediumd, yeard, setYeard, descriptiond, setDescriptiond}){
+function Edit({id, exhibit_id, newEditing, titled, setTitled, mediumd, setMediumd, yeard, setYeard, descriptiond, setDescriptiond}){
   const [errors, setErrors] = useState([]);
 
 function handleChange(e, setFn) {
@@ -28,7 +28,7 @@ function handleSave(e){
     })
     .then((r) => {
       if(r.ok) {
-        r.json().then((updated) => newEditing(updated));
+        r.json().then((updated) => newEditing(updated, exhibit_id));
       } else {
         r.json().then((err) => setErrors(err.errors));
     }

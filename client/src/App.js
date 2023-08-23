@@ -28,55 +28,73 @@ function App() {
 
   function addPhoto(newPost){
 
-    let newList = exhibits.filter((exhibit) => exhibit.id !== newPost.exhibit.id)
-
-    let combined = exhibits.filter((exhibit) => {
+    let updatedExhibits = [...exhibits].map((exhibit) => {
       if(exhibit.id == newPost.exhibit.id){
-        let newPhotos = ([...exhibit.photos, newPost])
-        return exhibit.photos = newPhotos
+      let newPhotos = [...exhibit.photos, newPost]
+
+      if(exhibit.photos.find((photo) => photo.photographer_id == newPost.photographer_id)){
+        exhibit.photos = newPhotos
+        return exhibit
+      } else {
+        let newPhotographers = [...exhibit.photographers, newPost.photographer]
+        exhibit.photographers = newPhotographers
+        exhibit.photos = newPhotos
+        return exhibit
       }
-    })
+    }
+    return exhibit
+  })
+  setExhibits(updatedExhibits)
+}
 
-    let newPhotographers = ([...combined[0].photographers, newPost.photographer])
-    const key = "name";
-    const photographersUnique = [...new Map(newPhotographers.map(item => [item[key], item])).values()]
-    //add new unique photographers to the exhibit
+  function handleDeletePost(id, exhibit_id, photographer_id){
 
-    let combinedAll = exhibits.filter((exhibit) => {
-      if(exhibit.id == newPost.exhibit.id){
-        return exhibit.photographers = photographersUnique
+    let updatedExhibits = [...exhibits].map((exhibit) => {
+
+      if(exhibit.id == exhibit_id){
+
+        let updatedPhotos = exhibit.photos.filter(((photo) => photo.id !== id))
+        exhibit.photos = updatedPhotos
+
+        if(updatedPhotos.find((photo) => photo.photographer_id == photographer_id)){
+
+          return exhibit
+        } else {
+          let newPhotographers = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
+          exhibit.photographers = newPhotographers
+
+          return exhibit
+        }
       }
+      return exhibit;
     })
-
-    setExhibits([...newList, ...combinedAll])
+    setExhibits(updatedExhibits)
   }
 
-  function handleDeletePost(id, exhibit_id, photographer_id) {
+    // let withOut = exhibits.find((exhibit) => {
+    //   console.log(exhibit.photos)
+    //   if(exhibit.id !== exhibit_id){
+    //     return exhibit
+    //   }})
 
-    let withOut = exhibits.filter((exhibit) => {
-      console.log(exhibit.photos)
-      if(exhibit.id !== exhibit_id){
-        return exhibit
-      }})
+    // let withr = exhibits.find((exhibit) => {
+    //   if(exhibit.id == exhibit_id){
+    //     let newPhotos= exhibit.photos.filter((photo) => photo.id !== id)
+    //     return exhibit.photos = newPhotos
+    //   }
+    // })
 
-    let withr = exhibits.filter((exhibit) => {
-      if(exhibit.id == exhibit_id){
-        let newPhotos= exhibit.photos.filter((photo) => photo.id !== id)
-        return exhibit.photos = newPhotos
-      }
-    })
+    // let newPhotographers = withr.find((exhibit) => {
+    //   if(exhibit.id == exhibit_id){
+    //     let updatedPhotogs = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
+    //     return exhibit.photographers = updatedPhotogs
+    //   }
 
-    let newPhotographers = withr.filter((exhibit) => {
-      if(exhibit.id == exhibit_id){
-        let updatedPhotogs = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
-        return exhibit.photographers = updatedPhotogs
-      }
+    // })
 
-    })
-
-    setExhibits([...withOut, ...newPhotographers])
-    console.log(newPhotographers)
-}
+//     setExhibits([...withOut, ...newPhotographers])
+//     console.log(newPhotographers)
+// }
 
 
 function addEdits(updated, exhibit_id){

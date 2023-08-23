@@ -1,7 +1,20 @@
 class PhotosController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
-    skip_before_action :authorize, only: [:index, :show]
+    skip_before_action :authorize, only: [:index, :show, :get_title]
+
+    def get_title
+        photos = Photo.where("title= ?", params[:title].titleize)
+        # byebug
+    if photos.size > 0
+        render json: photos
+    else
+        render json: { errors: "Photo with medium not found. Must either be film or digital." }, status: :unprocessable_entity
+    end
+    end
+
+
+
 
     def index
         photos = Photo.all
@@ -46,7 +59,7 @@ class PhotosController < ApplicationController
     private
 
     def photo_params
-        params.permit(:image_url, :title, :year, :description, :medium, :photographer_id, :exhibit_id)
+        params.permit(:image_url, :title, {:title => []}, :year, :description, :medium, :photographer_id, :exhibit_id)
     end
 
     def find_photo

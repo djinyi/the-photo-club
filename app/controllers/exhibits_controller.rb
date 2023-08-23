@@ -1,6 +1,11 @@
 class ExhibitsController < ApplicationController
-    skip_before_action :authorize, only: [:index, :destroy]
+    skip_before_action :authorize, only: [:index, :destroy, :room]
     wrap_parameters format: []
+
+    def room
+        exhibits = Exhibit.where("location = ?", "library")
+        render json: exhibits
+    end
 
     def index
         exhibits = Exhibit.all

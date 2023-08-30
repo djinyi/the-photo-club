@@ -4,5 +4,5 @@ class ExhibitSerializer < ActiveModel::Serializer
   has_many :photos
   has_many :photographers
 
-  # , serializer: ExhibitPhotoSerializer
+  # serializer: ExhibitPhotoSerializer
 end

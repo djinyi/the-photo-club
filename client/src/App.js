@@ -107,6 +107,7 @@ function addEdits(updated, exhibit_id){
       let newPhotos= ([...photosWithoutNew, updated])
       return exhibit.photos = newPhotos
     }
+    return exhibits
   })
   
   setExhibits([...newList, ...withr])

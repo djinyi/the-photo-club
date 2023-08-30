@@ -33,13 +33,12 @@ function App() {
       let newPhotos = [...exhibit.photos, newPost]
 
       if(exhibit.photos.find((photo) => photo.photographer_id == newPost.photographer_id)){
-        exhibit.photos = newPhotos
-        return exhibit
+        let updatedExhibit = {...exhibit, photos: newPhotos}
+        return updatedExhibit
       } else {
         let newPhotographers = [...exhibit.photographers, newPost.photographer]
-        exhibit.photographers = newPhotographers
-        exhibit.photos = newPhotos
-        return exhibit
+        let updatedExhibit = {...exhibit, photos: newPhotos, photographers: newPhotographers}
+        return updatedExhibit
       }
     }
     return exhibit
@@ -49,22 +48,20 @@ function App() {
 
   function handleDeletePost(id, exhibit_id, photographer_id){
 
-    let updatedExhibits = [...exhibits].map((exhibit) => {
+    let updatedExhibits = exhibits.map((exhibit) => {
 
       if(exhibit.id == exhibit_id){
 
         let updatedPhotos = exhibit.photos.filter(((photo) => photo.id !== id))
-        exhibit.photos = updatedPhotos
+        // let updatedEx = updatedPhotos
+        let updatedExhibit = {...exhibit, photos: updatedPhotos}
 
-        if(updatedPhotos.find((photo) => photo.photographer_id == photographer_id)){
-
-          return exhibit
-        } else {
+        if(!updatedPhotos.find((photo) => photo.photographer_id == photographer_id)){
           let newPhotographers = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
-          exhibit.photographers = newPhotographers
+          updatedExhibit.photographers = newPhotographers
 
-          return exhibit
-        }
+        } 
+        return updatedExhibit
       }
       return exhibit;
     })

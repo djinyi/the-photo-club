@@ -13,7 +13,4 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  get "/:title", to: "photos#get_title"
-  get "exhibits/room_305", to: "exhibits#room"
-
 end

@@ -2,7 +2,6 @@ class ExhibitsController < ApplicationController
     skip_before_action :authorize, only: [:index, :destroy]
     wrap_parameters format: []
 
-
     def index
         exhibits = Exhibit.all
         render json: exhibits, include: ['photographers', 'photos', 'photos.photographer'], status: :ok

@@ -3,25 +3,27 @@ import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 import Photo from "./Photo";
 
-function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
+function Photos({ addPhotographs, photographs, handleDeletePost, addEdits }){
     const [title, setTitle] = useState("");
     const [image_url, setImage_url] = useState("");
     const [year, setYear] = useState("");
     const [medium, setMedium] = useState("");
     const [description, setDescription] = useState("");
-    const [photographer_id, setPhotographer_id] = useState("");
     const [exhibit_id, setExhibit_id] = useState("");
     const [errors, setErrors] = useState([]);
+    
+
 
     const history = useHistory();
+    console.log(photographs)
 
     function handleSubmit(e) {
         e.preventDefault();
         const formData = {
-        title, year, description, image_url, medium, photographer_id, exhibit_id
+        title, year, description, image_url, medium, exhibit_id
         }
         console.log(formData)
-        fetch("/photos", {
+        fetch("/photographs", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -30,9 +32,9 @@ function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then((newPost) => addPhoto(newPost))
+                r.json().then((newPost) => addPhotographs(newPost))
             } else {
-                r.json().then((err) => setErrors(err.errors));
+                r.json().then((err) => console.log(err.errors));
             }
           });
 
@@ -42,17 +44,17 @@ function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
         setDescription("");
         setMedium("");
 
-        history.push('/photos')
+        history.push('/photographs')
         
     }
     
-    let pho = photos.map((photo) => (
+    let pho = photographs.map((photo) => (
         <div key={photo.id}>
-            <p><Link to= {`/photos/${photo.id}`}>{photo.title}</Link></p>
+            <p><Link to= {`/photographs/${photo.id}`}>{photo.title}</Link></p>
         </div>
     ))
 
-      let photoList = photos.map((photo) => (
+      let photoList = photographs.map((photo) => (
     <Photo
       key = {photo.id}
       id = {photo.id}
@@ -64,7 +66,7 @@ function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
       exhibit_id= {photo.exhibit_id}
       onDeletePost={handleDeletePost}
       addEdits = {addEdits}
-      photographer_id = {photo.photographer_id}
+      user_id = {photo.user_id}
   />
   ))
 
@@ -116,20 +118,13 @@ function Photos({ addPhoto, photos, handleDeletePost, addEdits }){
             value={description}
             onChange={e => setDescription(e.target.value)}
             />
-            <label> Photographer </label>
-            <select onChange={e => setPhotographer_id(e.target.value)} name="photographer" id="photographer">
-                <option> </option>
-                <option value="17">Lunis Loon</option>
-                <option value="18">Mile RazorBeak</option>
-                <option value="19">Kylo the Seedy</option>
-                <option value="20">R-10</option>
-            </select>
             <label> Exhibit </label>
             <select onChange={e => setExhibit_id(e.target.value)} name="exhibit" id="exhibit">
                 <option> </option>
-                <option value="13">The Southwest</option>
-                <option value="14">Thrifted Ideas</option>
-                <option value="15">Moments on Film</option>
+                <option value="16">The Southwest</option>
+                <option value="17">Thrifted Ideas</option>
+                <option value="18">Moments on Film</option>
+                <option value="20">Student Exhibit</option>
             </select>
             <button type="submit"> Submit </button>
             </form>

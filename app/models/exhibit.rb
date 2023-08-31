@@ -1,5 +1,5 @@
 class Exhibit < ApplicationRecord
-    has_many :photos, dependent: :destroy
-    has_many :photographers, through: :photos, dependent: :destroy
+    has_many :photographs, dependent: :destroy
+    has_many :users, through: :photographs, dependent: :destroy
 
 end

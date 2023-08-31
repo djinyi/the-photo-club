@@ -1,17 +1,33 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create, :show, :index, :destroy]
 
     def create
         user = User.create(user_params)
         if user.valid?
+            session[:user_id] = user.id
             render json: user, status: :created
         else
             record_error
         end
     end
 
+    def index
+        users = User.all 
+        render json: users
+    end
+
     def show
         render json: @current_user
+    end
+
+    def destroy
+        photograph = User.find_by(id: params[:id])
+        if photograph
+            photograph.destroy
+            render json: {}, head: :no_content
+        else
+            render_not_found_response
+        end
     end
 
     private

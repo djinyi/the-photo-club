@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import Photographers from "./Photographers";
 import Photographer from "./Photographer";
@@ -12,9 +12,12 @@ import LogOut from "./LogOut";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import PhotoPage from "./PhotoPage";
+import { UserContext } from "./user/UserContext";
 
 function App() {
   const [exhibits, setExhibits] = useState([]);
+  const [users, setUsers] = useState([]);
+  const user = useContext(UserContext);
 
   useEffect(() => {
     fetch("/exhibits")
@@ -22,22 +25,28 @@ function App() {
     .then(data => setExhibits(data))
   }, []);
 
+  useEffect(() => {
+    fetch("/users")
+    .then((r) => r.json())
+    .then(data => setUsers(data))
+  }, []);
+
+
   function addExhibit(newExhibit){
     setExhibits([...exhibits, newExhibit])
   }
 
-  function addPhoto(newPost){
-
+  function addPhotographs(newPost){
     let updatedExhibits = [...exhibits].map((exhibit) => {
       if(exhibit.id == newPost.exhibit.id){
-      let newPhotos = [...exhibit.photos, newPost]
+      let newPhotos = [...exhibit.photographs, newPost]
 
-      if(exhibit.photos.find((photo) => photo.photographer_id == newPost.photographer_id)){
-        let updatedExhibit = {...exhibit, photos: newPhotos}
+      if(exhibit.photographs.find((photo) => photo.user_id == newPost.user_id)){
+        let updatedExhibit = {...exhibit, photographs: newPhotos}
         return updatedExhibit
       } else {
-        let newPhotographers = [...exhibit.photographers, newPost.photographer]
-        let updatedExhibit = {...exhibit, photos: newPhotos, photographers: newPhotographers}
+        let newUsers = [...exhibit.users, newPost.user]
+        let updatedExhibit = {...exhibit, photographs: newPhotos, users: newUsers}
         return updatedExhibit
       }
     }
@@ -46,19 +55,19 @@ function App() {
   setExhibits(updatedExhibits)
 }
 
-  function handleDeletePost(id, exhibit_id, photographer_id){
+  function handleDeletePost(id, exhibit_id, user_id){
 
     let updatedExhibits = exhibits.map((exhibit) => {
 
       if(exhibit.id == exhibit_id){
 
-        let updatedPhotos = exhibit.photos.filter(((photo) => photo.id !== id))
+        let updatedPhotos = exhibit.photographs.filter(((photo) => photo.id !== id))
         // let updatedEx = updatedPhotos
-        let updatedExhibit = {...exhibit, photos: updatedPhotos}
+        let updatedExhibit = {...exhibit, photographs: updatedPhotos}
 
-        if(!updatedPhotos.find((photo) => photo.photographer_id == photographer_id)){
-          let newPhotographers = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
-          updatedExhibit.photographers = newPhotographers
+        if(!updatedPhotos.find((photo) => photo.user_id == user_id)){
+          let newUsers = exhibit.users.filter((user) => user.id !== user_id)
+          updatedExhibit.users = newUsers
 
         } 
         return updatedExhibit
@@ -68,57 +77,42 @@ function App() {
     setExhibits(updatedExhibits)
   }
 
-    // let withOut = exhibits.find((exhibit) => {
-    //   console.log(exhibit.photos)
-    //   if(exhibit.id !== exhibit_id){
-    //     return exhibit
-    //   }})
-
-    // let withr = exhibits.find((exhibit) => {
-    //   if(exhibit.id == exhibit_id){
-    //     let newPhotos= exhibit.photos.filter((photo) => photo.id !== id)
-    //     return exhibit.photos = newPhotos
-    //   }
-    // })
-
-    // let newPhotographers = withr.find((exhibit) => {
-    //   if(exhibit.id == exhibit_id){
-    //     let updatedPhotogs = exhibit.photographers.filter((photographer) => photographer.id !== photographer_id)
-    //     return exhibit.photographers = updatedPhotogs
-    //   }
-
-    // })
-
-//     setExhibits([...withOut, ...newPhotographers])
-//     console.log(newPhotographers)
-// }
-
-
 function addEdits(updated, exhibit_id){
   console.log(updated, exhibit_id)
+  // let newList = [...exhibits].filter((exhibit) => exhibit.id !== exhibit_id)
+
+let updatedExhibits = exhibits.map((exhibit) =>{
+  if(exhibit.id == exhibit_id){
+    let photosWithoutNew= exhibit.photographs.filter((photo) => photo.id !== updated.id)
+    let newPhotos= ([...photosWithoutNew, updated])
+    let newExhibit = {...exhibit, photographs: newPhotos}
+    return newExhibit
+  }
+  return exhibit})
+
+setExhibits(updatedExhibits)
+}
   
   //get list without exhibit in question
-  let newList = exhibits.filter((exhibit) => exhibit.id !== exhibit_id)
+  // let newList = [...exhibits].filter((exhibit) => exhibit.id !== exhibit_id)
   
-  //need to get exhibit with its photos
-  let withr = exhibits.filter((exhibit) => {
-    if(exhibit.id == exhibit_id){
-      let photosWithoutNew= exhibit.photos.filter((photo) => photo.id !== updated.id)
-      let newPhotos= ([...photosWithoutNew, updated])
-      return exhibit.photos = newPhotos
-    }
-    return exhibits
-  })
+  //need to get exhibit with its photographs
+  // let updatedExhibit = exhibits.find((exhibit) => {
+  //   if(exhibit.id == exhibit_id){
+  //     let photosWithoutNew= exhibit.photographs.filter((photo) => photo.id !== updated.id)
+  //     let newPhotos= ([...photosWithoutNew, updated])
+  //     let newExhibit = {...exhibit, photographs: newPhotos}
+  //     debugger
+
+  //     return newExhibit
+  //   }
+  //   debugger
+  //   return exhibit
+  // })
   
-  setExhibits([...newList, ...withr])
-}
-
-let photographers = exhibits.map((exhibit) => exhibit.photographers).flat()
-
-const key = "name";
-const photographersUnique = [...new Map(photographers.map(item => [item[key], item])).values()]
-
-console.log(exhibits)
+//   setExhibits([...newList, updatedExhibit])
+// debugger
+// }
 
 let listExhibits = exhibits.map((exhibit) => (
   <Exhibit
@@ -127,21 +121,26 @@ let listExhibits = exhibits.map((exhibit) => (
   name = {exhibit.name}
   location = {exhibit.location}
   date = {exhibit.date}
-  photos = {exhibit.photos}
-  photographers = {exhibit.photographers}
-  />
-  ))
-  
-let students = photographersUnique.map((photographer) => (
-  <Photographer 
-  key ={photographer.id}
-  id ={photographer.id}
-  name ={photographer.name}
-  year ={photographer.year}
+  photographs = {exhibit.photographs}
+  photographers = {exhibit.users}
   />
   ))
 
- let photos = exhibits.map((exhibit) => exhibit.photos).flat()
+
+function setNew(user){
+  //add user to users
+  setUsers([...users, user])
+}
+
+let students = users.map((photographer) => (
+  <Photographer 
+  key ={photographer.id}
+  id ={photographer.id}
+  username ={photographer.username}
+  />
+  ))
+
+ let photographs = exhibits.map((exhibit) => exhibit.photographs).flat()
 
 
   return (
@@ -150,7 +149,7 @@ let students = photographersUnique.map((photographer) => (
       <NavBar />
       <Switch>
         <Route exact path="/home">
-          <Home />
+          <Home setNew={setNew}/>
         </Route>
         <Route exact path="/photographers">
           <Photographers students={students} />
@@ -158,11 +157,11 @@ let students = photographersUnique.map((photographer) => (
         <Route exact path="/exhibits">
           <Exhibits addExhibit={addExhibit} shows={listExhibits} />
         </Route>
-        <Route exact path="/photos">
-          <Photos handleDeletePost = {handleDeletePost} addPhoto={addPhoto} photos={photos} addEdits={addEdits}/>
+        <Route exact path="/photographs">
+          <Photos handleDeletePost = {handleDeletePost} addPhotographs={addPhotographs} photographs={photographs} addEdits={addEdits}/>
         </Route>
-        <Route path='/photos/:id'>
-    		  <PhotoPage photos={photos} />
+        <Route path='/photographs/:id'>
+    		  <PhotoPage photographs={photographs} />
     	  </Route>
         <Route exact path="/logout">
           <LogOut />

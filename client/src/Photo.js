@@ -4,7 +4,7 @@ import { useHistory, useRouteMatch, Route } from "react-router-dom";
 import styled from "styled-components";
 import PhotoPage from "./PhotoPage";
 
-function Photo({ title, url, id , description, year, medium, exhibit_id, photographer_id, onDeletePost, addEdits }){
+function Photo({ title, url, id , description, year, medium, exhibit_id, user_id, onDeletePost, addEdits }){
     const [edit, setEdit] = useState(true);
     const [errors, setErrors] = useState([]);
     const [titled, setTitled] = useState(title)
@@ -16,16 +16,16 @@ function Photo({ title, url, id , description, year, medium, exhibit_id, photogr
     const match = useRouteMatch();
 
     function handleDeleteClick() {
-        fetch(`/photos/${id}`, {
+        fetch(`/photographs/${id}`, {
             method: "DELETE",
         })
         .then((r) => {
             if(r.ok) {
-                r.json().then(onDeletePost(id, exhibit_id, photographer_id))
+                r.json().then(onDeletePost(id, exhibit_id, user_id))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
-        history.push('/photos')
+        history.push('/photographs')
      })
     }
 

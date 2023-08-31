@@ -3,14 +3,13 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "./user/UserContext";
 import styled from "styled-components";
 
-function SignUp() {
+function SignUp({ setNew }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
-  console.log(user)
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +25,9 @@ function SignUp() {
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user);
+          setNew(user)})
       } else {
         r.json().then((err) => setErrors(err.errors));
     }

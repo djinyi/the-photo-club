@@ -10,11 +10,12 @@ function handleChange(e, setFn) {
   setFn(e.target.value)
 }
 
+
 function handleSave(e){
 
   e.preventDefault();
 
-       fetch(`/photos/${id}`, {
+       fetch(`/photographs/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

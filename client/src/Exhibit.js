@@ -1,21 +1,23 @@
 import React from "react";
 
-function Exhibit({ id, name, location, date, photos, photographers }){
+function Exhibit({ id, name, location, date, photographs, photographers }){
 
-    let listPhotos = photos.map((photo) => (
-        <div key={photo.id}>
-        <p><i>{photo.title} ({photo.year})</i> by {photo.photographer.name}</p>
+
+    let listPhotos = photographs.map((photograph) => (
+        <div key={photograph.id}>
+        <p><i>{photograph.title} ({photograph.year})</i> by {photograph.user.username}</p>
         </div>
     ))
 
-    const key = "name";
-    const photographersUnique = [...new Map(photographers.map(item => [item[key], item])).values()]
+    const key = "username";
+    let usersUnique = [...new Map(photographers.map(item => [item[key], item])).values()]
 
-    let listPhotographers = photographersUnique.map((photographer) => (
+    let listPhotographers = usersUnique.map((photographer) => (
         <div key={photographer.id}>
-        <p><i>{photographer.name} ({photographer.year})</i></p>
+        <p><i>{photographer.username}</i></p>
         </div>
     ))
+
     return(
         <div>
             <h1>{name}</h1>

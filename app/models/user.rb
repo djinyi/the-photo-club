@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-    has_many :photos
+    has_many :photographs, dependent: :destroy
+    has_many :exhibit, through: :photographs, dependent: :destroy
 
     has_secure_password
 

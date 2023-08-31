@@ -1,8 +1,7 @@
 class ExhibitSerializer < ActiveModel::Serializer
   attributes :id, :name, :location, :date
 
-  has_many :photos
-  has_many :photographers
+  has_many :photographs
+  has_many :users
 
-  # serializer: ExhibitPhotoSerializer
 end

@@ -1,41 +1,41 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Photographers({ students, addPhotographer }){
-    const [name, setName] = useState("");
-    const [year, setYear] = useState("");
-    const [errors, setErrors] = useState([]);
+function Photographers({ students }){
+    // const [name, setName] = useState("");
+    // const [year, setYear] = useState("");
+    // const [errors, setErrors] = useState([]);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const formData = {
-             name, year
-        }
-        console.log(formData)
-        fetch("/photographers", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then((r) => {
-            if(r.ok) {
-                r.json().then((newPost) => addPhotographer(newPost))
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-            }
-          });
 
-        setName("");
-        setYear("");
-    }
+    // function handleSubmit(e) {
+    //     e.preventDefault();
+    //     const formData = {
+    //          name, year, exhibits
+    //     }
+
+    //     fetch("/photographers", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(formData)
+    //     })
+    //     .then((r) => {
+    //         if(r.ok) {
+    //             r.json().then((newPost) => addPhotographers(newPost))
+    //         } else {
+    //             r.json().then((err) => setErrors(err.errors));
+    //         }
+    //       });
+
+    //     setName("");
+    // }
 
     return(
         <Detail>
         <h3> Our Photographers </h3>
         {students}
-        <h3> Submit a new photographer! </h3>
+        {/* <h3> Submit a new photographer! </h3>
         <p>
                 {errors.map((err) => (
                 <b key={err}>{err}! Must be logged in.</b>
@@ -58,7 +58,7 @@ function Photographers({ students, addPhotographer }){
             />
             <button type="submit"> Submit </button>
             </form>
-            <p> </p>
+            <p> </p> */}
 
         </Detail>
     )
